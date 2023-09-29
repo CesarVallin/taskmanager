@@ -34,7 +34,7 @@ public class User {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Task> tasks;
 
-    /** For authentication */
+    /** For UserWithRoles */
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         firstName = copy.firstName;
@@ -48,6 +48,15 @@ public class User {
 
     public User() {
 
+    }
+
+    public User(String firstName, String lastName, String username, String profilePic, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.profilePic = profilePic;
+        this.email = email;
+        this.password = password;
     }
 
     public User(String firstName, String lastName, String username, String profilePic, String email, String password, List<Task> tasks) {
