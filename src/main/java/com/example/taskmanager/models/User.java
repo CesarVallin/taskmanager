@@ -34,7 +34,7 @@ public class User {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Task> tasks;
 
-    /** For authentication */
+    /** For UserWithRoles */
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         firstName = copy.firstName;
