@@ -40,43 +40,28 @@ public class TaskController {
     }
 
     @PostMapping("/task/create")
-    public String createATaskPost(@ModelAttribute Task task, @RequestParam Date dateScheduled) {
+    public String createATaskPost(@ModelAttribute Task task, @RequestParam(name = "dateScheduled") Date dateScheduled) {
         /** User*/
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = userDao.findById(loggedInUser.getId()).get();
+        User currentUserId = userDao.findById(loggedInUser.getId()).get();
 
-
-        /** Dates */
+        /** Date - get current date for task created */
         Date currentDate = new Date(Calendar.getInstance().getTime().getTime());
 
-//        Date scheduleDate;
-//        if(task.getDateScheduled() != null) {
-//            scheduleDate = task.getDateScheduled();
-//        } else {
-//            scheduleDate = null;
-//        }
+        /** Does not work :*******************************/
+        String dateInput = dateScheduled.toString();
+        System.out.println(dateInput);
+        if(dateInput.isEmpty()) {
+            task.setDateScheduled(null);
+        }
 
-        /** Category */
+        /** Category - to set a category id for the task */
         Long categoryId = task.getCategory().getId();
         Category selectedCategory = categoryDao.findById(categoryId).get();
 
-//        Task newTask = new Task(
-//                task.getTitle(),
-//                task.getDescription(),
-//                currentDate,
-//                scheduleDate,
-//                false,
-//                currentUser,
-//                selectedCategory
-//        );
-
-//        taskDao.save(newTask);
-        if(dateScheduled != null) {
-            task.setDateScheduled(dateScheduled);
-        }
-
-        task.setUser(currentUser);
+        task.setUser(currentUserId);
         task.setDateCreated(currentDate);
+        task.setCategory(selectedCategory);
         taskDao.save(task);
         return "redirect:/profile";
     }
