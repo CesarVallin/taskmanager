@@ -9,6 +9,18 @@
 
   <main class="container">
     <h1>THIS IS YOUR PROFILE PAGE</h1>
+    <div th:each="task : ${tasks}">
+      <ul>
+        <li th:text="${task.title}"></li>
+        <li th:text="${task.description}"></li>
+        <li th:text="${task.dateCreated}"></li>
+        <li th:text="${task.dateScheduled}"></li>
+        <li th:text="${task.complete}"></li>
+        <li th:text="${task.category.title}"></li>
+      </ul>
+      <!--            <a th:href="@{/posts/{id}(id=${post.id})}">View Details</a>-->
+<!--      <a th:href="@{|/posts/${post.id}|}">View Details</a>-->
+    </div>
   </main>
 
   <footer th:replace="/partials/partials :: footer"></footer>

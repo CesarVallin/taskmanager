@@ -43,7 +43,7 @@ public class TaskController {
     public String createATaskPost(@ModelAttribute Task task, @RequestParam(name = "dateScheduled") Date dateScheduled) {
         /** User*/
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUserId = userDao.findById(loggedInUser.getId()).get();
+        User currentUser = userDao.findById(loggedInUser.getId()).get();
 
         /** Date - get current date for task created */
         Date currentDate = new Date(Calendar.getInstance().getTime().getTime());
@@ -59,7 +59,7 @@ public class TaskController {
         Long categoryId = task.getCategory().getId();
         Category selectedCategory = categoryDao.findById(categoryId).get();
 
-        task.setUser(currentUserId);
+        task.setUser(currentUser);
         task.setDateCreated(currentDate);
         task.setCategory(selectedCategory);
         taskDao.save(task);
