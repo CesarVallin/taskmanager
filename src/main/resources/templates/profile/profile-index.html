@@ -21,8 +21,7 @@
       <form th:method="POST" th:action="@{|/task/delete/${task.id}|}" th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
         <button type="button" class="btn btn-dark" onclick="showDeleteConfirmationModal(this.form)">Delete Task</button>
       </form>
-      <!--            <a th:href="@{/posts/{id}(id=${post.id})}">View Details</a>-->
-<!--      <a th:href="@{|/posts/${post.id}|}">View Details</a>-->
+      <a th:href="@{|/task/edit/${task.id}|}">Edit Task</a>
     </div>
   </main>
 
