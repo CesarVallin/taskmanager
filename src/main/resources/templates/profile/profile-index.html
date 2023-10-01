@@ -19,7 +19,7 @@
         <li th:text="${task.category.title}"></li>
       </ul>
       <form th:method="POST" th:action="@{|/task/delete/${task.id}|}" th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-        <button type="button" class="btn btn-dark" onclick="showDeleteConfirmationModal(this)">Delete Task</button>
+        <button type="button" class="btn btn-dark" onclick="showDeleteConfirmationModal(this.form)">Delete Task</button>
       </form>
       <!--            <a th:href="@{/posts/{id}(id=${post.id})}">View Details</a>-->
 <!--      <a th:href="@{|/posts/${post.id}|}">View Details</a>-->
@@ -57,10 +57,10 @@
 
 <script>
   /// Function to show the delete confirmation modal
-  function showDeleteConfirmationModal(button) {
+  function showDeleteConfirmationModal(form) {
     let modal = document.querySelector('#deleteConfirmationModal');
     let taskTitleSpan = document.querySelector('#taskTitle');
-    let form = button.closest('form');
+
 
     // Extract the task title and ID from the form's data attributes
     let taskTitle = form.getAttribute('data-task-title');
