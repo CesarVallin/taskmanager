@@ -9,10 +9,7 @@ import com.example.taskmanager.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 import java.util.List;
@@ -66,5 +63,16 @@ public class TaskController {
         return "redirect:/profile";
     }
 
-
+    @PostMapping("/task/delete/{id}")
+    public String deleteIndividualTask(@ModelAttribute Task task, @PathVariable long id) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(taskDao.existsById(id)) {
+            Task taskToDelete = taskDao.findById(id).get();
+            if (taskToDelete.getUser().getId() == loggedInUser.getId()) {
+                taskDao.delete(taskToDelete);
+                return "redirect:/profile";
+            }
+        }
+        return "redirect:/profile";
+    }
 }
