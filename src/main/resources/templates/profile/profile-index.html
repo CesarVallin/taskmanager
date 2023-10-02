@@ -14,7 +14,7 @@
         <li>Title: <span th:text="${task.title}"></span></li>
         <li>Description: <span th:text="${task.description}"></span></li>
         <li> Date Created: <span th:text="${task.dateCreated}"></span></li>
-        <li>Schedule: <span th:text="${task.dateScheduled}"></span></li>
+        <li th:if="${!#strings.contains(task.dateScheduled, '1969')}">Schedule: <span th:text="${task.dateScheduled}"></span></li>
         <li>Complete: <span th:text="${task.complete}"></span></li>
         <li>Category: <span th:text="${task.category.title}"></span></li>
       </ul>
