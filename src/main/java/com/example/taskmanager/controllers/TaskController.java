@@ -125,4 +125,21 @@ public class TaskController {
         }
         return "redirect:/profile";
     }
+
+    @PostMapping("/task/incomplete/{id}")
+    public String incompleteTask(@ModelAttribute Task task, @PathVariable long id) {
+        /** User */
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if(taskDao.existsById(id)) {
+            Task taskIncomplete = taskDao.findById(id).get();
+            if(taskIncomplete.getUser().getId() == loggedInUser.getId()) {
+                taskIncomplete.setComplete(false);
+                taskDao.save(taskIncomplete);
+                return "redirect:/task/edit/" + taskIncomplete.getId();
+            }
+        }
+        return "redirect:/profile";
+    }
+
 }
