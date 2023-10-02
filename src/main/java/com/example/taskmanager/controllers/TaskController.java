@@ -110,5 +110,19 @@ public class TaskController {
         return "redirect:/profile";
     }
 
+    @PostMapping("/task/complete/{id}")
+    public String completedTask(@ModelAttribute Task task, @PathVariable long id) {
+        /** User */
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        if(taskDao.existsById(id)) {
+            Task taskToComplete = taskDao.findById(id).get();
+            if(taskToComplete.getUser().getId() == loggedInUser.getId()) {
+                taskToComplete.setComplete(true);
+                taskDao.save(taskToComplete);
+                return "redirect:/profile";
+            }
+        }
+        return "redirect:/profile";
+    }
 }
