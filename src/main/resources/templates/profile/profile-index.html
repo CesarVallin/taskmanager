@@ -11,12 +11,12 @@
     <h1>THIS IS YOUR PROFILE PAGE</h1>
     <div th:each="task : ${tasks}">
       <ul>
-        <li th:text="${task.title}"></li>
-        <li th:text="${task.description}"></li>
-        <li th:text="${task.dateCreated}"></li>
-        <li th:text="${task.dateScheduled}"></li>
-        <li th:text="${task.complete}"></li>
-        <li th:text="${task.category.title}"></li>
+        <li>Title: <span th:text="${task.title}"></span></li>
+        <li>Description: <span th:text="${task.description}"></span></li>
+        <li> Date Created: <span th:text="${task.dateCreated}"></span></li>
+        <li>Schedule: <span th:text="${task.dateScheduled}"></span></li>
+        <li>Complete: <span th:text="${task.complete}"></span></li>
+        <li>Category: <span th:text="${task.category.title}"></span></li>
       </ul>
       <form th:method="POST" th:action="@{|/task/delete/${task.id}|}" th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
         <button type="button" class="btn btn-dark" onclick="showDeleteConfirmationModal(this.form)">Delete Task</button>
