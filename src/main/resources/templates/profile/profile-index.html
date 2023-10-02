@@ -19,11 +19,11 @@
         <li>Category: <span th:text="${task.category.title}"></span></li>
       </ul>
 
-      <form th:method="POST" th:action="@{|/task/complete/${task.id}|}" th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
+      <form th:if="${!task.complete}" th:method="POST" th:action="@{|/task/complete/${task.id}|}" th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
         <button type="button" class="btn btn-dark" onclick="showCompleteConfirmationModal(this.form)">Mark as complete</button>
       </form>
 
-      <form th:method="POST" th:action="@{|/task/incomplete/${task.id}|}" th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
+      <form th:if="${task.complete}" th:method="POST" th:action="@{|/task/incomplete/${task.id}|}" th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
         <button type="button" class="btn btn-dark" onclick="showIncompleteConfirmationModal(this.form)">Mark as incomplete (ongoing)</button>
       </form>
 
