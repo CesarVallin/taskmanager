@@ -8,7 +8,7 @@
   <header th:replace="/partials/partials :: header('Edit Task')"></header>
 
   <main class="container">
-    <h2>Create a Task</h2>
+    <h2>Edit Task</h2>
     <form th:method="POST" th:action="@{|/task/edit/${task.id}|}" th:object="${task}">
 
       <div class="form-group mb-3">
