@@ -38,9 +38,8 @@ public class TaskController {
     }
 
     @PostMapping("/task/create")
-    public String createATaskPost(@ModelAttribute Task task, @RequestParam(name = "dateScheduled") String dateScheduled) {
-        System.out.println("first check");
-        System.out.println(dateScheduled);
+    public String createATaskPost(@ModelAttribute Task task) {
+
         /** User*/
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.findById(loggedInUser.getId()).get();
