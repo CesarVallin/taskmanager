@@ -23,15 +23,21 @@
 
       <!-- Checkbox for scheduling -->
       <div class="form-check">
-        <input type="checkbox" class="form-check-input" name="scheduleCheckbox" id="scheduleCheckbox" th:checked="${task.dateScheduled != null}">
+        <input type="checkbox" class="form-check-input" name="scheduleCheckbox" id="scheduleCheckbox" th:checked="${!#strings.contains(task.dateScheduled, '1969')}">
         <label class="form-check-label" for="scheduleCheckbox">Schedule Task</label>
       </div>
 
       <!-- DateScheduled input (initially hidden) -->
-      <div id="dateScheduledField" th:if="${task.dateScheduled != null}">
+      <div th:if="${!#strings.contains(task.dateScheduled, '1969')}" id="dateScheduledField" style="display: block;">
         <div class="form-group mb-3">
           <label for="dateScheduled">Scheduled Date</label>
           <input th:field="*{dateScheduled}" type="date" name="dateScheduled" id="dateScheduled" class="form-control">
+        </div>
+      </div>
+      <div th:if="${#strings.contains(task.dateScheduled, '1969')}" id="dateScheduledField" style="display: none;">
+        <div class="form-group mb-3">
+          <label for="dateScheduled">Scheduled Date</label>
+          <input th:field="*{dateScheduled}" type="date" name="dateScheduled" id="dateScheduled1" class="form-control">
         </div>
       </div>
 
@@ -57,12 +63,17 @@
 
   const scheduleCheckbox = document.querySelector("#scheduleCheckbox");
   const dateScheduledField = document.querySelector("#dateScheduledField");
+  const dateScheduleCal = document.querySelector("#dateScheduled");
+  const dateScheduled1 = document.querySelector("#dateScheduled1");
 
   scheduleCheckbox.addEventListener("change", function() {
     if (scheduleCheckbox.checked) {
       dateScheduledField.style.display = "block";
+      dateScheduled1.value = new Date().toISOString().substring(0, 10);
     } else {
       dateScheduledField.style.display = "none";
+      dateScheduleCal.value = "1969-12-31";
+      dateScheduled1.value = "1969-12-31";
     }
   });
 
