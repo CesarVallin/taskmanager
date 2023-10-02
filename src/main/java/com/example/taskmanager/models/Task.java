@@ -24,7 +24,7 @@ public class Task {
     private Date dateCreated;
 
     @Column
-    private Date dateScheduled;
+    private Date dateScheduled = new Date(0);
 
     @Column
     private boolean complete;

@@ -38,7 +38,8 @@ public class TaskController {
     }
 
     @PostMapping("/task/create")
-    public String createATaskPost(@ModelAttribute Task task, @RequestParam(name = "dateScheduled") Date dateScheduled) {
+    public String createATaskPost(@ModelAttribute Task task) {
+
         /** User*/
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.findById(loggedInUser.getId()).get();
@@ -46,12 +47,6 @@ public class TaskController {
         /** Date - get current date for task created */
         Date currentDate = new Date(Calendar.getInstance().getTime().getTime());
 
-        /** Does not work :*******************************/
-        String dateInput = dateScheduled.toString();
-        System.out.println(dateInput);
-        if(dateInput.isEmpty()) {
-            task.setDateScheduled(null);
-        }
 
         /** Category - to set a category id for the task */
         Long categoryId = task.getCategory().getId();
