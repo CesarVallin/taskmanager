@@ -110,5 +110,36 @@ public class TaskController {
         return "redirect:/profile";
     }
 
+    @PostMapping("/task/complete/{id}")
+    public String completedTask(@ModelAttribute Task task, @PathVariable long id) {
+        /** User */
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if(taskDao.existsById(id)) {
+            Task taskToComplete = taskDao.findById(id).get();
+            if(taskToComplete.getUser().getId() == loggedInUser.getId()) {
+                taskToComplete.setComplete(true);
+                taskDao.save(taskToComplete);
+                return "redirect:/profile";
+            }
+        }
+        return "redirect:/profile";
+    }
+
+    @PostMapping("/task/incomplete/{id}")
+    public String incompleteTask(@ModelAttribute Task task, @PathVariable long id) {
+        /** User */
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if(taskDao.existsById(id)) {
+            Task taskIncomplete = taskDao.findById(id).get();
+            if(taskIncomplete.getUser().getId() == loggedInUser.getId()) {
+                taskIncomplete.setComplete(false);
+                taskDao.save(taskIncomplete);
+                return "redirect:/task/edit/" + taskIncomplete.getId();
+            }
+        }
+        return "redirect:/profile";
+    }
 
 }
