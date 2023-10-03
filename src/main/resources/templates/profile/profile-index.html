@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/partials/partials :: head('Profile')">
-    <script th:src="@{js/keys.js}"></script>
+
 </head>
 <body>
 
@@ -15,7 +15,7 @@
         <div>
             <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">
             <p th:text="${user.getUsername()}"></p>
-            <button type="button" id="file-stack-pic">Choose profile picture</button>
+            <button type="button" id="file-stack-picBtn">Choose profile picture</button>
         </div>
 
 
@@ -235,6 +235,7 @@
 <th:block th:replace="partials/partials :: scripts"></th:block>
 
 <script th:src="@{js/taskModalConfirmations.js}"></script>
+<script th:src="@{js/file-picker.js}"></script>
 
 </body>
 </html>

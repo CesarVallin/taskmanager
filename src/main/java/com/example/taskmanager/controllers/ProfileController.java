@@ -5,13 +5,12 @@ import com.example.taskmanager.models.User;
 import com.example.taskmanager.repositories.CategoryRepository;
 import com.example.taskmanager.repositories.TaskRepository;
 import com.example.taskmanager.repositories.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,11 +58,13 @@ public class ProfileController {
         return "profile/profile-index";
     }
 
-    @PostMapping("/profile/profile-pic")
+    @PutMapping("/profile/profile-pic")
     @ResponseBody
-    public String insertProfilePic(@ModelAttribute User user) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public User insertProfilePic(@RequestBody User user)  {
+        User loggedInUser = userDao.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
-        String fileStackPic = user.getProfilePic();
+        loggedInUser.setProfilePic(user.getProfilePic());
+        userDao.save(loggedInUser);
+        return loggedInUser;
     }
 }

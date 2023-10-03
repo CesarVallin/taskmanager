@@ -1,5 +1,6 @@
 package com.example.taskmanager.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Category {
     @Column(nullable = false)
     private String title;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "category")
     private List<Task> tasks;
 
