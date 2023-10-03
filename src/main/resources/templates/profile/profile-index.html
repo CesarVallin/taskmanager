@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/partials :: head('Profile')"></head>
+<head th:replace="/partials/partials :: head('Profile')">
+    <script th:src="@{js/keys.js}"></script>
+</head>
 <body>
 
 <div id="wrapper">
@@ -11,8 +13,9 @@
         <h1>THIS IS YOUR PROFILE PAGE</h1>
         
         <div>
-            <img th:src="${user.getProfilePic()}" alt="profile_pic">
+            <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">
             <p th:text="${user.getUsername()}"></p>
+            <button type="button" id="file-stack-pic">Choose profile picture</button>
         </div>
 
 
