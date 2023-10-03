@@ -18,6 +18,12 @@
             accept: ["image/jpeg", "image/png", "image/bmp"],
             onFileUploadFinished: async file => {
                 console.log(file.url);
+
+                // Bringing defaultPicBtn back -------
+                const defaultPicBtn = document.querySelector("#default-picBtn");
+                defaultPicBtn.style.display = 'inline';
+                // -----------------------------------
+
                 const imageElement = document.querySelector("#profile-pic-img");
                 imageElement.src = file.url;
 
@@ -61,13 +67,20 @@
     const defaultPicBtn = document.querySelector("#default-picBtn");
     defaultPicBtn.addEventListener("click", getDefaultPic);
 
+    // ------------------------------------------------------------------------------------
+    // Part 2
+    function updateDOMAfterProfileDefault() {
+        const imageElement = document.querySelector("#profile-pic-img");
+        imageElement.src = "/img/user-circle-icon-png-modified.png";
+        defaultPicBtn.style.display = 'none';
+    }
 
+    defaultPicBtn.addEventListener('click', () => {
+        updateDOMAfterProfileDefault();
+    });
+    // ------------------------------------------------------------------------------------
 
-
-
-
-
-
+// DEFAULT PIC END -----------------------------------------------------------------
 
 
 }) ();
