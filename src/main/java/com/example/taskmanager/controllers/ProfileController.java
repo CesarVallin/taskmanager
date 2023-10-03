@@ -5,10 +5,12 @@ import com.example.taskmanager.models.User;
 import com.example.taskmanager.repositories.CategoryRepository;
 import com.example.taskmanager.repositories.TaskRepository;
 import com.example.taskmanager.repositories.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +50,30 @@ public class ProfileController {
         // being used in columns...
         model.addAttribute("completeTasks", completeTasks);
         model.addAttribute("incompleteTasks", incompleteTasks);
+        // User
+        model.addAttribute("user", loggedInUser);
         // tasks, tasks, not used as of now...
         model.addAttribute("tasks", tasks);
 
         return "profile/profile-index";
     }
+
+    @PutMapping("/profile/profile-pic")
+    @ResponseBody
+    public User insertProfilePic(@RequestBody User user)  {
+        User loggedInUser = userDao.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        loggedInUser.setProfilePic(user.getProfilePic());
+        userDao.save(loggedInUser);
+        return loggedInUser;
+    }
+
+    @PutMapping("/profile/default-pic")
+    @ResponseBody
+    public void insertDefaultProfilePic(@RequestBody User user) {
+        User loggedInUser = userDao.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        loggedInUser.setProfilePic(user.getProfilePic());
+        userDao.save(loggedInUser);
+    }
+
 }

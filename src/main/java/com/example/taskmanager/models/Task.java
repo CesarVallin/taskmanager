@@ -1,6 +1,7 @@
 package com.example.taskmanager.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -29,6 +30,7 @@ public class Task {
     @Column
     private boolean complete;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
