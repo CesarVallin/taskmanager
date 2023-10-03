@@ -44,20 +44,26 @@
     const getDefaultPic = async () => {
         const imageElement = document.querySelector("#profile-pic-img");
         imageElement.src = "/img/user-circle-icon-png-modified.png";
-        let defaultPic = await fetch(`/profile/default-pic`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type' : 'application/json',
-                'X-CSRF-TOKEN': csrfToken
-            },
-            body: JSON.stringify({profilePic: "/img/user-circle-icon-png-modified.png"})
-        });
-        console.log(await defaultPic.json());
+
+            let defaultPic = await fetch(`/profile/default-pic`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({profilePic: "/img/user-circle-icon-png-modified.png"})
+            });
+            console.log(await defaultPic.json());
+
     };
 
     /** Event Listener on default-picBtn*/
     const defaultPicBtn = document.querySelector("#default-picBtn");
     defaultPicBtn.addEventListener("click", getDefaultPic);
+
+
+
+
 
 
 
