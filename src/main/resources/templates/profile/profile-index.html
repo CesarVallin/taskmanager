@@ -13,7 +13,7 @@
         <div class="row">
 <!--    COLUMN FOR COMPLETE TASKS START -->
             <div class="col-md-6">
-                <h2>Complete Tasks</h2>
+                <h2>Completed Tasks</h2>
                 <div class="accordion" id="completeTasksAccordion">
                     <div th:each="task : ${completeTasks}">
                         <div class="accordion-item">
@@ -52,21 +52,21 @@
 
                                         <form th:if="${!task.complete}" th:method="POST" th:action="@{|/task/complete/${task.id}|}"
                                               th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-                                            <button type="button" class="btn btn-dark" onclick="showCompleteConfirmationModal(this.form)">Mark
+                                            <button type="button" class="btn btn-success" onclick="showCompleteConfirmationModal(this.form)">Mark
                                                 as complete
                                             </button>
                                         </form>
 
                                         <form th:if="${task.complete}" th:method="POST" th:action="@{|/task/incomplete/${task.id}|}"
                                               th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-                                            <button type="button" class="btn btn-dark" onclick="showIncompleteConfirmationModal(this.form)">Mark
+                                            <button type="button" class="btn btn-warning" onclick="showIncompleteConfirmationModal(this.form)">Mark
                                                 as incomplete (ongoing)
                                             </button>
                                         </form>
 
                                         <form th:method="POST" th:action="@{|/task/delete/${task.id}|}" th:object="${task}"
                                               th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-                                            <button type="button" class="btn btn-dark" onclick="showDeleteConfirmationModal(this.form)">Delete
+                                            <button type="button" class="btn btn-danger" onclick="showDeleteConfirmationModal(this.form)">Delete
                                                 Task
                                             </button>
                                         </form>
@@ -83,7 +83,7 @@
 <!--    COLUMN FOR COMPLETE TASKS END -->
 <!--    COLUMN FOR INCOMPLETE TASKS START-->
             <div class="col-md-6">
-                <h2>Incomplete tasks</h2>
+                <h2>In progress tasks</h2>
                 <div class="accordion" id="incompleteTasksAccordion">
                     <div th:each="task : ${incompleteTasks}">
                         <div class="accordion-item">
@@ -122,21 +122,21 @@
 
                                         <form th:if="${!task.complete}" th:method="POST" th:action="@{|/task/complete/${task.id}|}"
                                               th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-                                            <button type="button" class="btn btn-dark" onclick="showCompleteConfirmationModal(this.form)">Mark
+                                            <button type="button" class="btn btn-success" onclick="showCompleteConfirmationModal(this.form)">Mark
                                                 as complete
                                             </button>
                                         </form>
 
                                         <form th:if="${task.complete}" th:method="POST" th:action="@{|/task/incomplete/${task.id}|}"
                                               th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-                                            <button type="button" class="btn btn-dark" onclick="showIncompleteConfirmationModal(this.form)">Mark
-                                                as incomplete (ongoing)
+                                            <button type="button" class="btn btn-warning" onclick="showIncompleteConfirmationModal(this.form)">Mark
+                                                as in-progress
                                             </button>
                                         </form>
 
                                         <form th:method="POST" th:action="@{|/task/delete/${task.id}|}" th:object="${task}"
                                               th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-                                            <button type="button" class="btn btn-dark" onclick="showDeleteConfirmationModal(this.form)">Delete
+                                            <button type="button" class="btn btn-danger" onclick="showDeleteConfirmationModal(this.form)">Delete
                                                 Task
                                             </button>
                                         </form>
