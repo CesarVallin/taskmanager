@@ -12,9 +12,9 @@
 
 <!--        ACCORDION START -->
         <div class="accordion" id="accordionExample">
+<!--        LOOPING THROUGH TASKS DIV START-->
+            <div th:each="task : ${tasks}">
             <div class="accordion-item">
-<!--                LOOPING THROUGH TASKS DIV START-->
-                <div th:each="task : ${tasks}">
 <!--                    TASK TITLE, BADGE, AND DROP-DOWN START -->
                     <div class="accordion-header">
                         <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${task.id}" aria-expanded="true" aria-controls="collapseOne">
@@ -74,12 +74,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-<!--                LOOPING THROUGH TASKS DIV END-->
-
             </div>
-        </div>
+<!--        LOOPING THROUGH TASKS DIV END-->
+            </div>
 <!--        ACCORDION END -->
+        </div>
     </main>
 
 <!--        <div th:each="task : ${tasks}">-->
