@@ -44,7 +44,7 @@
                                         <li class="list-group-item list-group-item-light">Complete:
                                             <span th:text="${task.complete}"></span>
                                         </li>
-                                        <li class="list-group-item list-group-item-secondary">Category:
+                                        <li class="list-group-item list-group-item-info">Category:
                                             <span th:text="${task.category.title}"></span>
                                         </li>
                                     </ul>
@@ -53,14 +53,14 @@
                                         <form th:if="${!task.complete}" th:method="POST" th:action="@{|/task/complete/${task.id}|}"
                                               th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
                                             <button type="button" class="btn btn-success" onclick="showCompleteConfirmationModal(this.form)">Mark
-                                                as complete
+                                                as: Complete
                                             </button>
                                         </form>
 
                                         <form th:if="${task.complete}" th:method="POST" th:action="@{|/task/incomplete/${task.id}|}"
                                               th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
                                             <button type="button" class="btn btn-warning" onclick="showIncompleteConfirmationModal(this.form)">Mark
-                                                as incomplete (ongoing)
+                                                as: In progress
                                             </button>
                                         </form>
 
@@ -114,7 +114,7 @@
                                         <li class="list-group-item list-group-item-light">Complete:
                                             <span th:text="${task.complete}"></span>
                                         </li>
-                                        <li class="list-group-item list-group-item-secondary">Category:
+                                        <li class="list-group-item list-group-item-info">Category:
                                             <span th:text="${task.category.title}"></span>
                                         </li>
                                     </ul>
@@ -123,14 +123,14 @@
                                         <form th:if="${!task.complete}" th:method="POST" th:action="@{|/task/complete/${task.id}|}"
                                               th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
                                             <button type="button" class="btn btn-success" onclick="showCompleteConfirmationModal(this.form)">Mark
-                                                as complete
+                                                as: Complete
                                             </button>
                                         </form>
 
                                         <form th:if="${task.complete}" th:method="POST" th:action="@{|/task/incomplete/${task.id}|}"
                                               th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
                                             <button type="button" class="btn btn-warning" onclick="showIncompleteConfirmationModal(this.form)">Mark
-                                                as in-progress
+                                                as: In progress
                                             </button>
                                         </form>
 
