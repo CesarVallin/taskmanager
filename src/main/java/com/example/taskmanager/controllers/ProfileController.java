@@ -48,6 +48,8 @@ public class ProfileController {
         // being used in columns...
         model.addAttribute("completeTasks", completeTasks);
         model.addAttribute("incompleteTasks", incompleteTasks);
+        // User
+        model.addAttribute("user", loggedInUser);
         // tasks, tasks, not used as of now...
         model.addAttribute("tasks", tasks);
 
