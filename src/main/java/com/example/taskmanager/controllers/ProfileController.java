@@ -67,4 +67,13 @@ public class ProfileController {
         userDao.save(loggedInUser);
         return loggedInUser;
     }
+
+    @PutMapping("/profile/default-pic")
+    @ResponseBody
+    public void insertDefaultProfilePic(@RequestBody User user) {
+        User loggedInUser = userDao.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        loggedInUser.setProfilePic(user.getProfilePic());
+        userDao.save(loggedInUser);
+    }
+
 }

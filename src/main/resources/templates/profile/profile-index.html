@@ -15,7 +15,9 @@
         <div>
             <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">
             <p th:text="${user.getUsername()}"></p>
-            <button type="button" id="file-stack-picBtn">Choose profile picture</button>
+            <button type="button" id="file-stack-picBtn" class="btn btn-primary">Choose profile picture</button>
+            <button type="button" id="default-picBtn" class="btn btn-primary">Delete profile picture</button>
+
         </div>
 
 

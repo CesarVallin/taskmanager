@@ -3,7 +3,7 @@
     console.log(`inside of file-picker.js`);
     const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
 
-
+// FILE PICKER START -----------------------------------------------------------------
     /** File picker API*/
     const getFilePicker = async () => {
         const client = await filestack.init(FILE_STACK_API);
@@ -38,6 +38,28 @@
     /** Event Listener on Button */
     const fileStackBtn = document.querySelector("#file-stack-picBtn");
     fileStackBtn.addEventListener("click", getFilePicker);
+// FILE PICKER END -----------------------------------------------------------------
+
+// DEFAULT PIC START -----------------------------------------------------------------
+    const getDefaultPic = async () => {
+        const imageElement = document.querySelector("#profile-pic-img");
+        imageElement.src = "/img/user-circle-icon-png-modified.png";
+        let defaultPic = await fetch(`/profile/default-pic`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type' : 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({profilePic: "/img/user-circle-icon-png-modified.png"})
+        });
+        console.log(await defaultPic.json());
+    };
+
+    /** Event Listener on default-picBtn*/
+    const defaultPicBtn = document.querySelector("#default-picBtn");
+    defaultPicBtn.addEventListener("click", getDefaultPic);
+
+
 
 
 
