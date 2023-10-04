@@ -30,12 +30,16 @@ public class UserController {
         String hash = passwordEncoder.encode(user.getPassword());
         String defaultProfilePic = "/img/user-circle-icon-png-modified.png";
 
+        /** Validation for potential empty fields */
+        if(user.getFirstName().isEmpty() || user.getLastName().isEmpty() || user.getUsername().isEmpty() || user.getTasks().isEmpty() || user.getPassword().isEmpty()) {
+            return "redirect:/sign-up?emptyFields";
+        }
+
         User proposedUser = new User();
         User userNameInspection = userDao.findByUsername(user.getUsername());
         User userEmailInpsection = userDao.findByEmail(user.getEmail());
-
+        /** Validation for unique fields in database: username & email*/
         if(userNameInspection != null) {
-
             return "redirect:/sign-up?invalidUsername";
         } else if (userEmailInpsection != null) {
             return "redirect:/sign-up?invalidEmail";
@@ -49,18 +53,6 @@ public class UserController {
             userDao.save(proposedUser);
             return "redirect:/login";
         }
-
-//        User newUser = new User(
-//                user.getFirstName(),
-//                user.getLastName(),
-//                user.getUsername(),
-//                defaultProfilePic,
-//                user.getEmail(),
-//                hash
-//        );
-//
-//        userDao.save(newUser);
-//        return "redirect:/login";
     }
 }
 
