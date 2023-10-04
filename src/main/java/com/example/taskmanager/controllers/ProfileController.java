@@ -66,20 +66,23 @@ public class ProfileController {
 
         User editedUser = userDao.findById(id).get();
 
-        User userNameInspection = userDao.findByUsername(user.getUsername());
-        User userEmailInpsection = userDao.findByEmail(user.getEmail());
-        if(userNameInspection == null) {
-            return "redirect:/profile?invalid-username=true";
-        } else if (userEmailInpsection == null) {
-            return "redirect:/profile?invalid-email=true";
-        } else {
-            editedUser.setFirstName(user.getFirstName());
-            editedUser.setLastName(user.getLastName());
-            editedUser.setUsername(user.getUsername());
-            editedUser.setEmail(user.getEmail());
-            userDao.save(editedUser);
-            return "redirect:/login";
+        if(loggedInUser.getId() == editedUser.getId()) {
+            User userNameInspection = userDao.findByUsername(user.getUsername());
+            User userEmailInpsection = userDao.findByEmail(user.getEmail());
+            if(userNameInspection != null) {
+                return "redirect:/profile?invalidUsername";
+            } else if (userEmailInpsection != null) {
+                return "redirect:/profile?invalidEmail";
+            } else {
+                editedUser.setFirstName(user.getFirstName());
+                editedUser.setLastName(user.getLastName());
+                editedUser.setUsername(user.getUsername());
+                editedUser.setEmail(user.getEmail());
+                userDao.save(editedUser);
+                return "redirect:/login";
+            }
         }
+        return "redirect:/profile";
 
 //        if(loggedInUser.getId() == editedUser.getId()) {
 //            editedUser.setFirstName(user.getFirstName());
