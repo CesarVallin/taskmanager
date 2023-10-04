@@ -69,9 +69,9 @@ public class ProfileController {
         if(loggedInUser.getId() == editedUser.getId()) {
             User userNameInspection = userDao.findByUsername(user.getUsername());
             User userEmailInpsection = userDao.findByEmail(user.getEmail());
-            if(userNameInspection != null) {
+            if(userNameInspection != null && (userNameInspection.getId() != loggedInUser.getId())) {
                 return "redirect:/profile?invalidUsername";
-            } else if (userEmailInpsection != null) {
+            } else if (userEmailInpsection != null && (userEmailInpsection.getId() != loggedInUser.getId())) {
                 return "redirect:/profile?invalidEmail";
             } else {
                 editedUser.setFirstName(user.getFirstName());
@@ -83,16 +83,6 @@ public class ProfileController {
             }
         }
         return "redirect:/profile";
-
-//        if(loggedInUser.getId() == editedUser.getId()) {
-//            editedUser.setFirstName(user.getFirstName());
-//            editedUser.setLastName(user.getLastName());
-//            editedUser.setUsername(user.getUsername());
-//            editedUser.setEmail(user.getEmail());
-//            userDao.save(editedUser);
-//            return "redirect:/login";
-//        }
-//        return "redirect:/profile";
     }
 
     @PutMapping("/profile/profile-pic")
