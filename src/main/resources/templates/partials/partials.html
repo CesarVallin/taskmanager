@@ -23,23 +23,23 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav d-flex w-100">
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profile</a>
+                    <a class="nav-link" href="/profile"><button class="btn-link btn btn-sm">Profile</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile/edit">Edit Profile</a>
+                    <a class="nav-link" href="/profile/edit"><button class="btn-link btn btn-sm">Edit Profile</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/task/create">Create Task</a>
+                    <a class="nav-link" href="/task/create"><button class="btn-link btn btn-sm">Create Task</button></a>
                 </li>
                 <li class="nav-item ms-auto">
-                    <a class="nav-link" href="/sign-up">Register</a>
+                    <a class="nav-link" href="/sign-up"><button class="btn-link btn btn-sm">Register</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/login"><button class="btn-link btn btn-sm">Login</button></a>
                 </li>
                 <li class="nav-item">
                     <form th:action="@{/logout}" th:method="post">
-                        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                        <button class="btn-link btn btn-sm">Logout</button>
                     </form>
                 </li>
             </ul>
