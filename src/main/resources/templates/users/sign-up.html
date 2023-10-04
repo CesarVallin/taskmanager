@@ -9,25 +9,45 @@
     <header th:replace="/partials/partials :: header('Sign-up')"></header>
 
     <main class="container">
+        <div th:if="${param.invalidUsername}">
+            Unable to use username, username already exists.
+        </div>
+        <div th:if="${param.invalidEmail}">
+            Unable to use email, email already exists.
+        </div>
+        <div th:if="${param.emptyFields}">
+            Please ensure to fill all form fields.
+        </div>
+
         <h1>Create an account</h1>
         <form th:action="@{/sign-up}" method="POST" th:object="${user}">
 
-            <label for="firstname">First name</label>
-            <input id="firstname" th:field="*{firstName}" required>
+            <div class="form-group mb-3">
+                <label for="firstname">First name</label>
+                <input id="firstname" th:field="*{firstName}" class="form-control" required>
+            </div>
 
-            <label for="lastname">Last name</label>
-            <input id="lastname" th:field="*{lastName}" required>
+            <div class="form-group mb-3">
+                <label for="lastname">Last name</label>
+                <input id="lastname" th:field="*{lastName}" class="form-control" required>
+            </div>
 
-            <label for="username">user-name</label>
-            <input id="username" th:field="*{username}" required>
+            <div class="form-group mb-3">
+                <label for="username">user-name</label>
+                <input id="username" th:field="*{username}" class="form-control" required>
+            </div>
 
-            <label for="email">Email</label>
-            <input id="email" th:field="*{email}" required>
+            <div class="form-group mb-3">
+                <label for="email">Email</label>
+                <input id="email" th:field="*{email}" class="form-control" required>
+            </div>
 
-            <label for="password">Password</label>
-            <input id="password" type="password" th:field="*{password}" required>
+            <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <input id="password" type="password" th:field="*{password}" class="form-control" required>
+            </div>
 
-            <input value="Sign me up!" type="submit"/>
+            <button type="submit" class="btn btn-sm">Submit</button>
         </form>
     </main>
 
