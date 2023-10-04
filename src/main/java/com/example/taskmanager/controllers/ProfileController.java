@@ -58,6 +58,25 @@ public class ProfileController {
         return "profile/profile-index";
     }
 
+    @PostMapping("/profile/edit/{id}")
+    public String updateUserInfo(@ModelAttribute User user, @PathVariable long id) {
+
+//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInUser = userDao.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        User editedUser = userDao.findById(id).get();
+
+        if(loggedInUser.getId() == editedUser.getId()) {
+            editedUser.setFirstName(user.getFirstName());
+            editedUser.setLastName(user.getLastName());
+            editedUser.setUsername(user.getUsername());
+            editedUser.setEmail(user.getEmail());
+            userDao.save(editedUser);
+            return "redirect:/login";
+        }
+        return "redirect:/profile";
+    }
+
     @PutMapping("/profile/profile-pic")
     @ResponseBody
     public User insertProfilePic(@RequestBody User user)  {
