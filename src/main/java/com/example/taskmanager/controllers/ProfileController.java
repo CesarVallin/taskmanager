@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProfileController {
@@ -61,12 +62,17 @@ public class ProfileController {
     @PostMapping("/profile/edit/{id}")
     public String updateUserInfo(@ModelAttribute User user, @PathVariable long id) {
 
-//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User loggedInUser = userDao.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         User editedUser = userDao.findById(id).get();
 
-        if(loggedInUser.getId() == editedUser.getId()) {
+        User userNameInspection = userDao.findByUsername(user.getUsername());
+        User userEmailInpsection = userDao.findByEmail(user.getEmail());
+        if(userNameInspection == null) {
+            return "redirect:/profile?invalid-username=true";
+        } else if (userEmailInpsection == null) {
+            return "redirect:/profile?invalid-email=true";
+        } else {
             editedUser.setFirstName(user.getFirstName());
             editedUser.setLastName(user.getLastName());
             editedUser.setUsername(user.getUsername());
@@ -74,7 +80,16 @@ public class ProfileController {
             userDao.save(editedUser);
             return "redirect:/login";
         }
-        return "redirect:/profile";
+
+//        if(loggedInUser.getId() == editedUser.getId()) {
+//            editedUser.setFirstName(user.getFirstName());
+//            editedUser.setLastName(user.getLastName());
+//            editedUser.setUsername(user.getUsername());
+//            editedUser.setEmail(user.getEmail());
+//            userDao.save(editedUser);
+//            return "redirect:/login";
+//        }
+//        return "redirect:/profile";
     }
 
     @PutMapping("/profile/profile-pic")
