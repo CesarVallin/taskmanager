@@ -26,20 +26,41 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user){
+    public String saveUser(@ModelAttribute User user, Model model){
         String hash = passwordEncoder.encode(user.getPassword());
         String defaultProfilePic = "/img/user-circle-icon-png-modified.png";
-        User newUser = new User(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getUsername(),
-                defaultProfilePic,
-                user.getEmail(),
-                hash
-        );
 
-        userDao.save(newUser);
-        return "redirect:/login";
+        User proposedUser = new User();
+        User userNameInspection = userDao.findByUsername(user.getUsername());
+        User userEmailInpsection = userDao.findByEmail(user.getEmail());
+
+        if(userNameInspection != null) {
+
+            return "redirect:/sign-up?invalidUsername";
+        } else if (userEmailInpsection != null) {
+            return "redirect:/sign-up?invalidEmail";
+        } else {
+            proposedUser.setFirstName(user.getFirstName());
+            proposedUser.setLastName(user.getLastName());
+            proposedUser.setUsername(user.getUsername());
+            proposedUser.setProfilePic(defaultProfilePic);
+            proposedUser.setEmail(user.getEmail());
+            proposedUser.setPassword(hash);
+            userDao.save(proposedUser);
+            return "redirect:/login";
+        }
+
+//        User newUser = new User(
+//                user.getFirstName(),
+//                user.getLastName(),
+//                user.getUsername(),
+//                defaultProfilePic,
+//                user.getEmail(),
+//                hash
+//        );
+//
+//        userDao.save(newUser);
+//        return "redirect:/login";
     }
 }
 
