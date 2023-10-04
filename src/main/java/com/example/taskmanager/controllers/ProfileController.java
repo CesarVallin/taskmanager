@@ -66,11 +66,6 @@ public class ProfileController {
 
         User editedUser = userDao.findById(id).get();
 
-        /** Validation for potential empty fields */
-        if(user.getFirstName().isEmpty() || user.getLastName().isEmpty() || user.getUsername().isEmpty() || user.getEmail().isEmpty()) {
-            return "redirect:/profile?emptyFields";
-        }
-
         /** Validation for unique fields in database: username & email*/
         if(loggedInUser.getId() == editedUser.getId()) {
             User userNameInspection = userDao.findByUsername(user.getUsername());

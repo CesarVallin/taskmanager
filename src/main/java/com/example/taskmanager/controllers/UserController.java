@@ -26,14 +26,10 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user, Model model){
+    public String saveUser(@ModelAttribute User user){
         String hash = passwordEncoder.encode(user.getPassword());
         String defaultProfilePic = "/img/user-circle-icon-png-modified.png";
 
-        /** Validation for potential empty fields */
-        if(user.getFirstName().isEmpty() || user.getLastName().isEmpty() || user.getUsername().isEmpty() || user.getTasks().isEmpty() || user.getPassword().isEmpty()) {
-            return "redirect:/sign-up?emptyFields";
-        }
 
         User proposedUser = new User();
         User userNameInspection = userDao.findByUsername(user.getUsername());
