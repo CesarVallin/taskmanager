@@ -45,16 +45,19 @@
                             <label for="email-edit">Email</label>
                             <input id="email-edit" th:field="*{email}" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn btn-sm" id="update-profileBtn">Update Profile info</button>
+                        <button type="submit" class="btn btn-sm" id="update-profileBtn">Submit updated fields</button>
                     </form>
+                    <div class="py-5">
+                        <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>
+                        <button th:if="${#strings.contains(user.getProfilePic(), 'https')}" type="button" id="default-picBtn" class="btn btn-primary btn-sm">Delete profile picture</button>
+                    </div>
                 </div>
+
+<!--                <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>-->
+<!--                <button th:if="${#strings.contains(user.getProfilePic(), 'https')}" type="button" id="default-picBtn" class="btn btn-primary btn-sm">Delete profile picture</button>-->
 
             </div>
 <!--            Offcanvas END-->
-
-            <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>
-            <button th:if="${#strings.contains(user.getProfilePic(), 'https')}" type="button" id="default-picBtn" class="btn btn-primary btn-sm">Delete profile picture</button>
-
         </div>
 
 
