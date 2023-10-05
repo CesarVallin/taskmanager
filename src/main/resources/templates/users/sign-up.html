@@ -16,35 +16,41 @@
             Unable to use email, email already exists.
         </div>
 
-        <h1>Create an account</h1>
         <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+<!--            adjusting form's width & center start -->
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="firstname">First name</label>
+                        <input id="firstname" th:field="*{firstName}" class="form-control" required>
+                    </div>
 
-            <div class="form-group mb-3">
-                <label for="firstname">First name</label>
-                <input id="firstname" th:field="*{firstName}" class="form-control" required>
+                    <div class="form-group mb-3">
+                        <label for="lastname">Last name</label>
+                        <input id="lastname" th:field="*{lastName}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="username">user-name</label>
+                        <input id="username" th:field="*{username}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email">Email</label>
+                        <input id="email" th:field="*{email}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" th:field="*{password}" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-sm">Submit</button>
+
+                </div>
             </div>
+            <!--        adjusting form's width & center end -->
 
-            <div class="form-group mb-3">
-                <label for="lastname">Last name</label>
-                <input id="lastname" th:field="*{lastName}" class="form-control" required>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="username">user-name</label>
-                <input id="username" th:field="*{username}" class="form-control" required>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="email">Email</label>
-                <input id="email" th:field="*{email}" class="form-control" required>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="password">Password</label>
-                <input id="password" type="password" th:field="*{password}" class="form-control" required>
-            </div>
-
-            <button type="submit" class="btn btn-sm">Submit</button>
         </form>
     </main>
 
