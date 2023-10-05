@@ -65,6 +65,13 @@
         </div>
 
 
+        <div th:each="task : ${scheduledTasks}">
+            <div th:if="${!task.complete}">
+                <p th:text="${task.title}"></p>
+                <p th:text="${task.dateScheduled}"></p>
+            </div>
+        </div>
+
 <!--    ROW START -->
         <div class="row">
 <!--    COLUMN FOR COMPLETE TASKS START -->
@@ -209,6 +216,7 @@
 <!--    COLUMN FOR INCOMPLETE TASKS END-->
         </div>
 <!--    ROW END -->
+
     </main>
 
 

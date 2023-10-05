@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,9 +49,27 @@ public class ProfileController {
                 incompleteTasks.add(task);
             }
         }
-        // being used in columns...
+        /** Initialize list for scheduled / unscheduled tasks */
+        List<Task> scheduledTasks = new ArrayList<>();
+        List<Task> unscheduledTasks = new ArrayList<>();
+        /** Conditional set up LOOP for scheduled / unscheduled tasks lists*/
+        for (Task task : tasks) {
+            if (task.getDateScheduled().getTime() > 0) { // Filter scheduled tasks based on the default date
+                scheduledTasks.add(task);
+            } else {
+                unscheduledTasks.add(task);
+            }
+        }
+
+        /** Sort scheduled tasks by dateScheduled */
+        scheduledTasks.sort(Comparator.comparing(Task::getDateScheduled));
+
+        // being used in columns (COMPLETE, INCOMPLETE)...
         model.addAttribute("completeTasks", completeTasks);
         model.addAttribute("incompleteTasks", incompleteTasks);
+        // (SCHEDULED / UNSCHEDULED)
+        model.addAttribute("scheduledTasks", scheduledTasks);
+        model.addAttribute("unscheduledTasks", unscheduledTasks);
         // User
         model.addAttribute("user", loggedInUser);
         // tasks, tasks, not used as of now...
