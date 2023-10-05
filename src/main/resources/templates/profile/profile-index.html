@@ -23,7 +23,7 @@
             <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>
 
 <!--            Offcanvas START-->
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="editProfileBtn">
                 Edit Profile
             </button>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -55,7 +55,9 @@
                     </form>
                     <div class="py-5">
                         <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>
-                        <button th:if="${#strings.contains(user.getProfilePic(), 'https')}" type="button" id="default-picBtn" class="btn btn-primary btn-sm">Delete profile picture</button>
+<!--                        <button th:if="${#strings.contains(user.getProfilePic(), 'https')}" type="button" id="default-picBtn" class="btn btn-primary btn-sm">Delete profile picture</button>-->
+                        <button type="button" id="default-picBtn" class="btn btn-primary btn-sm" style="display: none;">Delete profile picture</button>
+
                     </div>
                 </div>
 

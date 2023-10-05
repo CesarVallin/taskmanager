@@ -20,8 +20,8 @@
                 console.log(file.url);
 
                 // Bringing defaultPicBtn back -------
-                const defaultPicBtn = document.querySelector("#default-picBtn");
-                defaultPicBtn.style.display = 'inline';
+                // const defaultPicBtn = document.querySelector("#default-picBtn");
+                // defaultPicBtn.style.display = 'inline';
                 // -----------------------------------
 
                 const imageElement = document.querySelector("#profile-pic-img");
@@ -45,6 +45,22 @@
     const fileStackBtn = document.querySelector("#file-stack-picBtn");
     fileStackBtn.addEventListener("click", getFilePicker);
 // FILE PICKER END -----------------------------------------------------------------
+
+/** Event listener on Edit Profile button ------------------------------------------*/
+    // select edit profile button
+    const editProfileBtn = document.querySelector("#editProfileBtn");
+
+    editProfileBtn.addEventListener("click", () => {
+        // select profile-image img element
+        const imageElement = document.querySelector("#profile-pic-img");
+        // select `delete` profile image button
+        const defaultPicBtn = document.querySelector("#default-picBtn");
+        if(!imageElement.src.includes("/img/user-circle-icon-png-modified.png")) {
+            defaultPicBtn.style.display = 'inline';
+        }
+    });
+
+/** ----------------------------------------------------------------------------------*/
 
 // DEFAULT PIC START -----------------------------------------------------------------
     const getDefaultPic = async () => {
