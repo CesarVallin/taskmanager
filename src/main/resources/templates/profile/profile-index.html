@@ -69,6 +69,8 @@
             <div th:if="${!task.complete}">
                 <p th:text="${task.title}"></p>
                 <p th:text="${task.dateScheduled}"></p>
+                <p><span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/<span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/<span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span></p>
+<!--                <p th:text="${#temporals.formatISO(task.dateScheduled)}"></p>-->
             </div>
         </div>
 
