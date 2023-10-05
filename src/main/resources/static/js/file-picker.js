@@ -19,11 +19,6 @@
             onFileUploadFinished: async file => {
                 console.log(file.url);
 
-                // Bringing defaultPicBtn back -------
-                // const defaultPicBtn = document.querySelector("#default-picBtn");
-                // defaultPicBtn.style.display = 'inline';
-                // -----------------------------------
-
                 const imageElement = document.querySelector("#profile-pic-img");
                 imageElement.src = file.url;
 
@@ -46,6 +41,7 @@
     fileStackBtn.addEventListener("click", getFilePicker);
 // FILE PICKER END -----------------------------------------------------------------
 
+// Event triggering defaultBtn visibility!
 /** Event listener on Edit Profile button ------------------------------------------*/
     // select edit profile button
     const editProfileBtn = document.querySelector("#editProfileBtn");
