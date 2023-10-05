@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/partials :: head('Edit Task')"></head>
+<head th:replace="partials/partials :: head('Edit Task')"></head>
 <body>
 
 <div id="wrapper">
-  <nav th:replace="/partials/partials :: nav"></nav>
-  <header th:replace="/partials/partials :: header('Edit Task')"></header>
+  <nav th:replace="partials/partials :: nav"></nav>
+  <header th:replace="partials/partials :: header('Edit Task')"></header>
 
   <main class="container">
 
@@ -59,10 +59,10 @@
     </form>
   </main>
 
-  <footer th:replace="/partials/partials :: footer"></footer>
+  <footer th:replace="partials/partials :: footer"></footer>
 </div>
 
-<th:block th:replace="/partials/partials :: scripts"></th:block>
+<th:block th:replace="partials/partials :: scripts"></th:block>
 
 <script>
 

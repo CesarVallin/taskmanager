@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/partials :: head('Home')"></head>
+<head th:replace="partials/partials :: head('Home')"></head>
 <body>
 
 <div id="wrapper">
-    <nav th:replace="/partials/partials :: nav"></nav>
-    <header th:replace="/partials/partials :: header('Home')"></header>
+    <nav th:replace="partials/partials :: nav"></nav>
+    <header th:replace="partials/partials :: header('Home')"></header>
 
     <main class="container">
         <h1>Welcome to Task Manager</h1>
     </main>
 
-    <footer th:replace="/partials/partials :: footer"></footer>
+    <footer th:replace="partials/partials :: footer"></footer>
 </div>
 
 

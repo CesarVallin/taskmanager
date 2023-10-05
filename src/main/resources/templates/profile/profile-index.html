@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/partials :: head('Profile')">
+<head th:replace="partials/partials :: head('Profile')">
 
 </head>
 <body>
 
 <div id="wrapper">
-    <nav th:replace="/partials/partials :: nav"></nav>
-    <header th:replace="/partials/partials :: header('Profile')"></header>
+    <nav th:replace="partials/partials :: nav"></nav>
+    <header th:replace="partials/partials :: header('Profile')"></header>
 
     <main class="container">
         <h1>THIS IS YOUR PROFILE PAGE</h1>
@@ -284,7 +284,7 @@
     <!--  INCOMPLETE CONFIRMATION MODAL -->
 
 
-    <footer th:replace="/partials/partials :: footer"></footer>
+    <footer th:replace="partials/partials :: footer"></footer>
 </div>
 
 
