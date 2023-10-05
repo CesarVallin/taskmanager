@@ -5,29 +5,41 @@
 <body>
 
 <div id="wrapper">
-  <nav th:replace="/partials/partials :: nav"></nav>
-  <header th:replace="/partials/partials :: header('login')"></header>
+    <nav th:replace="/partials/partials :: nav"></nav>
+    <header th:replace="/partials/partials :: header('login')"></header>
 
-  <main class="container">
-    <h1>Log In</h1>
-    <div th:if="${param.error}">
-      Invalid Username and Password.
-    </div>
-    <div th:if="${param.logout}">
-      You have been logged out.
-    </div>
+    <main class="container">
+        <div th:if="${param.error}">
+            Invalid Username and Password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
 
-    <form th:action="@{/login}" method="post">
-      <label for="username">Username</label>
-      <input id="username" name="username" type="text" required/>
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" required/>
-      <input type="submit" value="Log In"/>
-    </form>
+        <form th:action="@{/login}" method="post">
+            <!--      adjusting form's width & center start-->
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="username">Username</label>
+                            <input id="username" name="username" type="text" class="form-control" required>
+                        </div>
 
-  </main>
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input id="password" name="password" type="password" class="form-control" required>
+                        </div>
 
-  <footer th:replace="/partials/partials :: footer"></footer>
+                        <button type="submit" class="btn btn-sm">Submit</button>
+
+                    </div>
+                </div>
+            <!--      adjusting form's width & center end-->
+        </form>
+
+    </main>
+
+    <footer th:replace="/partials/partials :: footer"></footer>
 </div>
 
 <th:block th:replace="partials/partials :: scripts"></th:block>
