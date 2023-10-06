@@ -71,15 +71,17 @@
                 <div>
                     <span th:text="${task.title}"></span>
                     <span class="badge bg-warning rounded-pill">In progress</span>
-                    <br>
-                    <span class="badge bg-info rounded pill">Schedule </span>
-                    <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
-                    <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
-                    <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
+                    <span th:if="${!#strings.contains(task.dateScheduled, '1969')}" class="badge bg-info rounded pill">Target Date:
+                        <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
+                        <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
+                        <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
+                    </span>
                 </div>
             </div>
         </div>
 <!--   Pretty scheduled task test END -->
+
+
 
 <!--    ROW START -->
         <div class="row">
