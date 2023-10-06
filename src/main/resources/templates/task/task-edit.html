@@ -25,18 +25,18 @@
 
           <!-- Checkbox for scheduling -->
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="scheduleCheckbox" id="scheduleCheckbox" th:checked="${!#strings.contains(task.dateScheduled, '1969')}">
+            <input type="checkbox" class="form-check-input" name="scheduleCheckbox" id="scheduleCheckbox" th:checked="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}">
             <label class="form-check-label" for="scheduleCheckbox">Schedule Task</label>
           </div>
 
           <!-- DateScheduled input (initially hidden) -->
-          <div th:if="${!#strings.contains(task.dateScheduled, '1969')}" id="dateScheduledField" style="display: block;">
+          <div th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" id="dateScheduledField" style="display: block;">
             <div class="form-group mb-3">
               <label for="dateScheduled">Scheduled Date</label>
               <input th:field="*{dateScheduled}" type="date" name="dateScheduled" id="dateScheduled" class="form-control">
             </div>
           </div>
-          <div th:if="${#strings.contains(task.dateScheduled, '1969')}" id="dateScheduledField" style="display: none;">
+          <div th:if="${#strings.contains(task.dateScheduled, '1969') || #strings.contains(task.dateScheduled, '1970')}" id="dateScheduledField" style="display: none;">
             <div class="form-group mb-3">
               <label for="dateScheduled">Scheduled Date</label>
               <input th:field="*{dateScheduled}" type="date" name="dateScheduled" id="dateScheduled" class="form-control">
