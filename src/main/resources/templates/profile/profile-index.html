@@ -10,7 +10,7 @@
     <header th:replace="partials/partials :: header('Profile')"></header>
 
     <main class="container">
-        <h1>THIS IS YOUR PROFILE PAGE</h1>
+
         <div th:if="${param.invalidUsername}">
             Unable to change username, username already exists.
         </div>
@@ -64,15 +64,24 @@
 <!--            Offcanvas END-->
         </div>
 
-
+<!-- Pretty scheduled task test START -->
+        <h2>Target date tasks</h2>
         <div th:each="task : ${scheduledTasks}">
             <div th:if="${!task.complete}">
-                <p th:text="${task.title}"></p>
-                <p th:text="${task.dateScheduled}"></p>
-                <p><span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/<span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/<span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span></p>
-<!--                <p th:text="${#temporals.formatISO(task.dateScheduled)}"></p>-->
+                <div>
+                    <span th:text="${task.title}"></span>
+                    <span class="badge bg-warning rounded-pill">In progress</span>
+                    <span th:if="${!#strings.contains(task.dateScheduled, '1969')}" class="badge bg-info rounded pill">Target Date:
+                        <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
+                        <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
+                        <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
+                    </span>
+                </div>
             </div>
         </div>
+<!--   Pretty scheduled task test END -->
+
+
 
 <!--    ROW START -->
         <div class="row">
@@ -155,9 +164,14 @@
                             <!--                    TASK TITLE, BADGE, AND DROP-DOWN START -->
                             <div class="accordion-header">
                                 <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${task.id}" aria-expanded="true" aria-controls="collapseOne">
-                                    <span th:text="${task.title}"></span>
-                                    <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
-                                    <span th:if="${!task.complete}" class="badge bg-warning rounded-pill">In progress</span>
+                                        <span th:text="${task.title}"></span>
+                                        <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
+                                        <span th:if="${!task.complete}" class="badge bg-warning rounded-pill">In progress</span>
+                                        <span th:if="${!#strings.contains(task.dateScheduled, '1969')}" class="badge bg-info rounded pill">Target Date:
+                                            <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
+                                        </span>
                                 </button>
 
                             </div>
