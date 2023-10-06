@@ -25,7 +25,7 @@
 
           <!-- Checkbox for scheduling -->
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="scheduleCheckbox" id="scheduleCheckbox" th:checked="${!#strings.contains(task.dateScheduled, '1969') || !#strings.contains(task.dateScheduled, '1970')}">
+            <input type="checkbox" class="form-check-input" name="scheduleCheckbox" id="scheduleCheckbox" th:checked="${!#strings.contains(task.dateScheduled, '1969')}">
             <label class="form-check-label" for="scheduleCheckbox">Schedule Task</label>
           </div>
 

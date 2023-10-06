@@ -71,7 +71,7 @@
                 <div>
                     <span th:text="${task.title}"></span>
                     <span class="badge bg-warning rounded-pill">In progress</span>
-                    <span th:if="${!#strings.contains(task.dateScheduled, '1969') || !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
+                    <span th:if="${!#strings.contains(task.dateScheduled, '1969')}" class="badge bg-info rounded pill">Target Date:
                         <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
                         <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
                         <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
@@ -112,7 +112,7 @@
                                             <span th:text="${task.dateCreated}"></span>
                                         </li>
                                         <li class="list-group-item list-group-item-light"
-                                            th:if="${!#strings.contains(task.dateScheduled, '1969') || !#strings.contains(task.dateScheduled, '1970')}">Schedule:
+                                            th:if="${!#strings.contains(task.dateScheduled, '1969')}">Schedule:
                                             <span th:text="${task.dateScheduled}"></span>
                                         </li>
                                         <li class="list-group-item list-group-item-light">Complete:
@@ -167,7 +167,7 @@
                                         <span th:text="${task.title}"></span>
                                         <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
                                         <span th:if="${!task.complete}" class="badge bg-warning rounded-pill">In progress</span>
-                                        <span th:if="${!#strings.contains(task.dateScheduled, '1969') || !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
+                                        <span th:if="${!#strings.contains(task.dateScheduled, '1969')}" class="badge bg-info rounded pill">Target Date:
                                             <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
                                             <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
                                             <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
@@ -187,7 +187,7 @@
                                             <span th:text="${task.dateCreated}"></span>
                                         </li>
                                         <li class="list-group-item list-group-item-light"
-                                            th:if="${!#strings.contains(task.dateScheduled, '1969') || !#strings.contains(task.dateScheduled, '1970')}">Schedule:
+                                            th:if="${!#strings.contains(task.dateScheduled, '1969')}">Schedule:
                                             <span th:text="${task.dateScheduled}"></span>
                                         </li>
                                         <li class="list-group-item list-group-item-light">Complete:
