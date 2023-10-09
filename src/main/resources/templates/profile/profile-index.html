@@ -73,7 +73,9 @@
                 <div th:each="task : ${scheduledTasks}">
                     <div th:if="${!task.complete}">
                         <div>
-                            <span th:text="${task.title}"></span>
+                            <a th:href="'#task-' + ${task.id}" class="anchorMagic">
+                                <span th:text="${task.title}"></span>
+                            </a>
                             <span class="badge bg-warning rounded-pill">In progress</span>
                             <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
                         <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
@@ -166,7 +168,7 @@
             <div class="col-md-6">
                 <h2>In progress tasks</h2>
                 <div class="accordion" id="incompleteTasksAccordion">
-                    <div th:each="task : ${incompleteTasks}">
+                    <div th:each="task : ${incompleteTasks}" th:id="'task-' + ${task.id}">
                         <div class="accordion-item">
                             <!--                    TASK TITLE, BADGE, AND DROP-DOWN START -->
                             <div class="accordion-header">
@@ -313,7 +315,31 @@
 
 <script th:src="@{js/taskModalConfirmations.js}"></script>
 <script th:src="@{js/file-picker.js}"></script>
+<script>
+    // Add event listeners to anchor tags with class "anchorMagic"
+    document.querySelectorAll('.anchorMagic').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent the default behavior of the anchor tag
 
+            // Get the target task ID from the href attribute of the anchor
+            const targetTaskId = anchor.getAttribute('href').replace('#task-', '');
+
+            // Scroll to the target task in the second section
+            const targetElement = document.getElementById('task-' + targetTaskId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' }); // You can use 'auto' for instant scrolling
+            }
+
+            // Open the accordion for the target task by targeting the button based on data-bs-target
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                const targetAttribute = button.getAttribute('data-bs-target');
+                if (targetAttribute === '#collapse' + targetTaskId) {
+                    button.click();
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
