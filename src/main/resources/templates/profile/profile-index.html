@@ -20,7 +20,6 @@
 
 <!--        NEW Offcanvas start -->
         <div>
-
 <!--            <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">-->
 <!--            <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>-->
 
@@ -68,15 +67,15 @@
 
                     </div>
                 </div>
-
             </div>
-            <!--            Offcanvas END-->
         </div>
+<!--            Offcanvas END-->
 
 
 <!--        ROW START -->
         <div class="row">
             <div class="col-md-6">
+                <hr>
                 <!-- Pretty scheduled task test START -->
                 <h2>Target date tasks</h2>
                 <div th:each="task : ${scheduledTasks}">
@@ -85,7 +84,6 @@
                             <a th:href="'#task-' + ${task.id}" class="anchorMagic">
                                 <span th:text="${task.title}"></span>
                             </a>
-                            <span class="badge bg-warning rounded-pill">In progress</span>
                             <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
                         <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
                         <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
@@ -95,6 +93,7 @@
                     </div>
                 </div>
                 <!--   Pretty scheduled task test END -->
+                <hr>
             </div>
         </div>
 <!--        ROW END -->
@@ -105,7 +104,8 @@
         <div class="row">
 <!--    COLUMN FOR INCOMPLETE TASKS START-->
             <div class="col-md-6">
-                <h2>In progress tasks</h2>
+                <hr>
+                <h2>In Progress Tasks</h2>
                 <div class="accordion" id="incompleteTasksAccordion">
                     <div th:each="task : ${incompleteTasks}" th:id="'task-' + ${task.id}">
                         <div class="accordion-item">
@@ -114,7 +114,6 @@
                                 <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${task.id}" aria-expanded="true" aria-controls="collapseOne">
                                         <span th:text="${task.title}"></span>
                                         <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
-                                        <span th:if="${!task.complete}" class="badge bg-warning rounded-pill">In progress</span>
                                         <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
                                             <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
                                             <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
@@ -176,10 +175,12 @@
                         </div>
                     </div>
                 </div>
+                <hr>
             </div>
 <!--    COLUMN FOR INCOMPLETE TASKS END-->
 <!--    COLUMN FOR COMPLETE TASKS START -->
             <div class="col-md-6">
+                <hr>
                 <h2>Completed Tasks</h2>
                 <div class="accordion" id="completeTasksAccordion">
                     <div th:each="task : ${completeTasks}">
@@ -189,7 +190,6 @@
                                 <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${task.id}" aria-expanded="true" aria-controls="collapseOne">
                                     <span th:text="${task.title}"></span>
                                     <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
-                                    <span th:if="${!task.complete}" class="badge bg-warning rounded-pill">In progress</span>
                                 </button>
 
                             </div>
@@ -246,6 +246,7 @@
                         </div>
                     </div>
                 </div>
+                <hr>
             </div>
 <!--    COLUMN FOR COMPLETE TASKS END -->
         </div>
