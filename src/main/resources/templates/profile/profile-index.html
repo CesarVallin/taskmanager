@@ -17,56 +17,64 @@
         <div th:if="${param.invalidEmail}">
             Unable to change email, email already exists.
         </div>
-<!--        ROW START -->
-        <div class="row">
-            <div class="col-md-6">
-                <div>
-                    <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">
-                    <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>
 
-                    <!--            Offcanvas START-->
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="editProfileBtn">
-                        Edit Profile
-                    </button>
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+<!--        NEW Offcanvas start -->
+        <div>
 
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Edit Profile</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<!--            <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">-->
+<!--            <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>-->
+
+            <!--            Offcanvas START-->
+<!--            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="editProfileBtn">-->
+<!--                Edit Profile-->
+<!--            </button>-->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Profile</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+                    <div>
+                        <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">
+                        <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>
+                    </div>
+                    <hr>
+                    <form th:action="@{|/profile/edit/${user.id}|}" method="POST" th:object="${user}" id="profile-edit-form">
+                        <div class="form-group mb-3">
+                            <label for="firstname-edit">First name</label>
+                            <input id="firstname-edit" th:field="*{firstName}" class="form-control" required>
                         </div>
-
-                        <div class="offcanvas-body">
-                            <form th:action="@{|/profile/edit/${user.id}|}" method="POST" th:object="${user}" id="profile-edit-form">
-                                <div class="form-group mb-3">
-                                    <label for="firstname-edit">First name</label>
-                                    <input id="firstname-edit" th:field="*{firstName}" class="form-control" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="lastname-edit">Last name</label>
-                                    <input id="lastname-edit" th:field="*{lastName}" class="form-control" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="username-edit">user-name</label>
-                                    <input id="username-edit" th:field="*{username}" class="form-control" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="email-edit">Email</label>
-                                    <input id="email-edit" th:field="*{email}" class="form-control" required>
-                                </div>
-                                <button type="submit" class="btn btn-sm" id="update-profileBtn">Submit updated fields</button>
-                            </form>
-                            <div class="py-5">
-                                <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>
-                                <button type="button" id="default-picBtn" class="btn btn-primary btn-sm" style="display: none;">Delete profile picture</button>
-
-                            </div>
+                        <div class="form-group mb-3">
+                            <label for="lastname-edit">Last name</label>
+                            <input id="lastname-edit" th:field="*{lastName}" class="form-control" required>
                         </div>
+                        <div class="form-group mb-3">
+                            <label for="username-edit">user-name</label>
+                            <input id="username-edit" th:field="*{username}" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email-edit">Email</label>
+                            <input id="email-edit" th:field="*{email}" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm" id="update-profileBtn">Submit updated fields</button>
+                    </form>
+                    <hr>
+                    <div class="py-3">
+                        <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>
+                        <button type="button" id="default-picBtn" class="btn btn-primary btn-sm" style="display: none;">Delete profile picture</button>
 
                     </div>
-                    <!--            Offcanvas END-->
                 </div>
 
             </div>
+            <!--            Offcanvas END-->
+        </div>
+
+
+<!--        ROW START -->
+        <div class="row">
             <div class="col-md-6">
                 <!-- Pretty scheduled task test START -->
                 <h2>Target date tasks</h2>

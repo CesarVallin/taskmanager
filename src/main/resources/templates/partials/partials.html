@@ -27,11 +27,17 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav d-flex w-100">
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile"><button class="btn-link btn btn-sm">Profile</button></a>
+                    <a class="nav-link" href="/profile"><button class="btn-link btn btn-sm">Task-Hub</button></a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="/profile/edit"><button class="btn-link btn btn-sm">Edit Profile</button></a>-->
-<!--                </li>-->
+
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <button class="btn-link btn btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="editProfileBtn">
+                            Profile
+                        </button>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/task/create"><button class="btn-link btn btn-sm">Create Task</button></a>
                 </li>
