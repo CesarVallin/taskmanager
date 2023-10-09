@@ -11,62 +11,71 @@
 
     <main class="container">
 
-        <div th:if="${param.invalidUsername}">
+        <div th:if="${param.invalidUsername}" class="text-danger">
             Unable to change username, username already exists.
         </div>
-        <div th:if="${param.invalidEmail}">
+        <div th:if="${param.invalidEmail}" class="text-danger">
             Unable to change email, email already exists.
         </div>
-<!--        ROW START -->
-        <div class="row">
-            <div class="col-md-6">
-                <div>
-                    <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">
-                    <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>
 
-                    <!--            Offcanvas START-->
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="editProfileBtn">
-                        Edit Profile
-                    </button>
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+<!--        NEW Offcanvas start -->
+        <div>
 
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Edit Profile</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<!--            <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">-->
+<!--            <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>-->
+
+            <!--            Offcanvas START-->
+<!--            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="editProfileBtn">-->
+<!--                Edit Profile-->
+<!--            </button>-->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Profile</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+                    <div>
+                        <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">
+                        <p th:text="${user.getUsername()}"></p>
+                    </div>
+                    <hr>
+                    <form th:action="@{|/profile/edit/${user.id}|}" method="POST" th:object="${user}" id="profile-edit-form">
+                        <div class="form-group mb-3">
+                            <label for="firstname-edit">First name</label>
+                            <input id="firstname-edit" th:field="*{firstName}" class="form-control" required>
                         </div>
-
-                        <div class="offcanvas-body">
-                            <form th:action="@{|/profile/edit/${user.id}|}" method="POST" th:object="${user}" id="profile-edit-form">
-                                <div class="form-group mb-3">
-                                    <label for="firstname-edit">First name</label>
-                                    <input id="firstname-edit" th:field="*{firstName}" class="form-control" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="lastname-edit">Last name</label>
-                                    <input id="lastname-edit" th:field="*{lastName}" class="form-control" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="username-edit">user-name</label>
-                                    <input id="username-edit" th:field="*{username}" class="form-control" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="email-edit">Email</label>
-                                    <input id="email-edit" th:field="*{email}" class="form-control" required>
-                                </div>
-                                <button type="submit" class="btn btn-sm" id="update-profileBtn">Submit updated fields</button>
-                            </form>
-                            <div class="py-5">
-                                <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>
-                                <button type="button" id="default-picBtn" class="btn btn-primary btn-sm" style="display: none;">Delete profile picture</button>
-
-                            </div>
+                        <div class="form-group mb-3">
+                            <label for="lastname-edit">Last name</label>
+                            <input id="lastname-edit" th:field="*{lastName}" class="form-control" required>
                         </div>
+                        <div class="form-group mb-3">
+                            <label for="username-edit">user-name</label>
+                            <input id="username-edit" th:field="*{username}" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email-edit">Email</label>
+                            <input id="email-edit" th:field="*{email}" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm" id="update-profileBtn">Submit updated fields</button>
+                        <br><span>Log in required after submittal</span>
+                    </form>
+                    <hr>
+                    <div class="py-3">
+                        <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>
+                        <button type="button" id="default-picBtn" class="btn btn-primary btn-sm" style="display: none;">Delete profile picture</button>
 
                     </div>
-                    <!--            Offcanvas END-->
                 </div>
 
             </div>
+            <!--            Offcanvas END-->
+        </div>
+
+
+<!--        ROW START -->
+        <div class="row">
             <div class="col-md-6">
                 <!-- Pretty scheduled task test START -->
                 <h2>Target date tasks</h2>
@@ -315,31 +324,7 @@
 
 <script th:src="@{js/taskModalConfirmations.js}"></script>
 <script th:src="@{js/file-picker.js}"></script>
-<script>
-    // Add event listeners to anchor tags with class "anchorMagic"
-    document.querySelectorAll('.anchorMagic').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault(); // Prevent the default behavior of the anchor tag
-
-            // Get the target task ID from the href attribute of the anchor
-            const targetTaskId = anchor.getAttribute('href').replace('#task-', '');
-
-            // Scroll to the target task in the second section
-            const targetElement = document.getElementById('task-' + targetTaskId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth' }); // You can use 'auto' for instant scrolling
-            }
-
-            // Open the accordion for the target task by targeting the button based on data-bs-target
-            document.querySelectorAll('.accordion-button').forEach(button => {
-                const targetAttribute = button.getAttribute('data-bs-target');
-                if (targetAttribute === '#collapse' + targetTaskId) {
-                    button.click();
-                }
-            });
-        });
-    });
-</script>
+<script th:src="@{js/anchorMagic.js}"></script>
 
 </body>
 </html>
