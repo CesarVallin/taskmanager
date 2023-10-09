@@ -77,18 +77,20 @@
             <div class="col-md-6">
                 <hr>
                 <!-- Pretty scheduled task test START -->
-                <h2>Target date tasks</h2>
+                <h2>Target Date Tasks <span class="badge bg-info rounded pill">Target Date</span></h2>
                 <div th:each="task : ${scheduledTasks}">
                     <div th:if="${!task.complete}">
-                        <div>
+                        <div class="d-flex justify-content-between">
                             <a th:href="'#task-' + ${task.id}" class="anchorMagic">
                                 <span th:text="${task.title}"></span>
                             </a>
-                            <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
-                        <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
-                        <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
-                        <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
-                    </span>
+                            <div>
+                                <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">
+                                    <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
+                                    <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
+                                    <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,7 +107,7 @@
 <!--    COLUMN FOR INCOMPLETE TASKS START-->
             <div class="col-md-6">
                 <hr>
-                <h2>In Progress Tasks</h2>
+                <h2>In Progress Tasks <span class="badge bg-warning rounded pill">In Progress</span></h2>
                 <div class="accordion" id="incompleteTasksAccordion">
                     <div th:each="task : ${incompleteTasks}" th:id="'task-' + ${task.id}">
                         <div class="accordion-item">
@@ -113,7 +115,6 @@
                             <div class="accordion-header">
                                 <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${task.id}" aria-expanded="true" aria-controls="collapseOne">
                                         <span th:text="${task.title}"></span>
-                                        <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
                                         <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
                                             <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
                                             <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
@@ -181,7 +182,7 @@
 <!--    COLUMN FOR COMPLETE TASKS START -->
             <div class="col-md-6">
                 <hr>
-                <h2>Completed Tasks</h2>
+                <h2>Completed Tasks <span class="badge bg-success rounded pill">Complete</span></h2>
                 <div class="accordion" id="completeTasksAccordion">
                     <div th:each="task : ${completeTasks}">
                         <div class="accordion-item">
