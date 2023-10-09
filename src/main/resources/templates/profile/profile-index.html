@@ -20,7 +20,6 @@
 
 <!--        NEW Offcanvas start -->
         <div>
-
 <!--            <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">-->
 <!--            <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>-->
 
@@ -68,10 +67,9 @@
 
                     </div>
                 </div>
-
             </div>
-            <!--            Offcanvas END-->
         </div>
+<!--            Offcanvas END-->
 
 
 <!--        ROW START -->
@@ -85,7 +83,6 @@
                             <a th:href="'#task-' + ${task.id}" class="anchorMagic">
                                 <span th:text="${task.title}"></span>
                             </a>
-                            <span class="badge bg-warning rounded-pill">In progress</span>
                             <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
                         <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
                         <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
@@ -114,7 +111,6 @@
                                 <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${task.id}" aria-expanded="true" aria-controls="collapseOne">
                                         <span th:text="${task.title}"></span>
                                         <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
-                                        <span th:if="${!task.complete}" class="badge bg-warning rounded-pill">In progress</span>
                                         <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
                                             <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
                                             <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
@@ -189,7 +185,6 @@
                                 <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${task.id}" aria-expanded="true" aria-controls="collapseOne">
                                     <span th:text="${task.title}"></span>
                                     <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
-                                    <span th:if="${!task.complete}" class="badge bg-warning rounded-pill">In progress</span>
                                 </button>
 
                             </div>
