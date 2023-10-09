@@ -11,10 +11,10 @@
 
     <main class="container">
 
-        <div th:if="${param.invalidUsername}">
+        <div th:if="${param.invalidUsername}" class="text-danger">
             Unable to change username, username already exists.
         </div>
-        <div th:if="${param.invalidEmail}">
+        <div th:if="${param.invalidEmail}" class="text-danger">
             Unable to change email, email already exists.
         </div>
 
@@ -38,7 +38,7 @@
                 <div class="offcanvas-body">
                     <div>
                         <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">
-                        <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>
+                        <p th:text="${user.getUsername()}"></p>
                     </div>
                     <hr>
                     <form th:action="@{|/profile/edit/${user.id}|}" method="POST" th:object="${user}" id="profile-edit-form">
@@ -59,6 +59,7 @@
                             <input id="email-edit" th:field="*{email}" class="form-control" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-sm" id="update-profileBtn">Submit updated fields</button>
+                        <br><span>Log in required after submittal</span>
                     </form>
                     <hr>
                     <div class="py-3">
