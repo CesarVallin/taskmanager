@@ -103,76 +103,6 @@
 
 <!--    ROW START -->
         <div class="row">
-<!--    COLUMN FOR COMPLETE TASKS START -->
-            <div class="col-md-6">
-                <h2>Completed Tasks</h2>
-                <div class="accordion" id="completeTasksAccordion">
-                    <div th:each="task : ${completeTasks}">
-                        <div class="accordion-item">
-                            <!--                    TASK TITLE, BADGE, AND DROP-DOWN START -->
-                            <div class="accordion-header">
-                                <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${task.id}" aria-expanded="true" aria-controls="collapseOne">
-                                    <span th:text="${task.title}"></span>
-                                    <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
-                                    <span th:if="${!task.complete}" class="badge bg-warning rounded-pill">In progress</span>
-                                </button>
-
-                            </div>
-                            <!--                    TASK TITLE, BADGE, AND DROP-DOWN END-->
-
-                            <div th:id="'collapse' + ${task.id}" class="accordion-collapse collapse" data-bs-parent="#completeTasksAccordion">
-                                <div class="accordion-body">
-                                    <ul class="list-group">
-                                        <li class="list-group-item list-group-item-light">Description:
-                                            <span th:text="${task.description}"></span>
-                                        </li>
-                                        <li class="list-group-item list-group-item-light"> Date Created:
-                                            <span th:text="${task.dateCreated}"></span>
-                                        </li>
-                                        <li class="list-group-item list-group-item-light"
-                                            th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}">Schedule:
-                                            <span th:text="${task.dateScheduled}"></span>
-                                        </li>
-                                        <li class="list-group-item list-group-item-light">Complete:
-                                            <span th:text="${task.complete}"></span>
-                                        </li>
-                                        <li class="list-group-item list-group-item-info">Category:
-                                            <span th:text="${task.category.title}"></span>
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex justify-content-around align-items-center">
-
-                                        <form th:if="${!task.complete}" th:method="POST" th:action="@{|/task/complete/${task.id}|}"
-                                              th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-                                            <button type="button" class="btn btn-success" onclick="showCompleteConfirmationModal(this.form)">Mark
-                                                as: Complete
-                                            </button>
-                                        </form>
-
-                                        <form th:if="${task.complete}" th:method="POST" th:action="@{|/task/incomplete/${task.id}|}"
-                                              th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-                                            <button type="button" class="btn btn-warning" onclick="showIncompleteConfirmationModal(this.form)">Mark
-                                                as: In progress
-                                            </button>
-                                        </form>
-
-                                        <form th:method="POST" th:action="@{|/task/delete/${task.id}|}" th:object="${task}"
-                                              th:data-task-id="${task.id}" th:data-task-title="${task.title}">
-                                            <button type="button" class="btn btn-danger" onclick="showDeleteConfirmationModal(this.form)">Delete
-                                                Task
-                                            </button>
-                                        </form>
-                                        <div>
-                                            <a th:href="@{|/task/edit/${task.id}|}">Edit Task</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-<!--    COLUMN FOR COMPLETE TASKS END -->
 <!--    COLUMN FOR INCOMPLETE TASKS START-->
             <div class="col-md-6">
                 <h2>In progress tasks</h2>
@@ -248,6 +178,76 @@
                 </div>
             </div>
 <!--    COLUMN FOR INCOMPLETE TASKS END-->
+<!--    COLUMN FOR COMPLETE TASKS START -->
+            <div class="col-md-6">
+                <h2>Completed Tasks</h2>
+                <div class="accordion" id="completeTasksAccordion">
+                    <div th:each="task : ${completeTasks}">
+                        <div class="accordion-item">
+                            <!--                    TASK TITLE, BADGE, AND DROP-DOWN START -->
+                            <div class="accordion-header">
+                                <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${task.id}" aria-expanded="true" aria-controls="collapseOne">
+                                    <span th:text="${task.title}"></span>
+                                    <span th:if="${task.complete}" class="badge bg-success rounded-pill">Complete</span>
+                                    <span th:if="${!task.complete}" class="badge bg-warning rounded-pill">In progress</span>
+                                </button>
+
+                            </div>
+                            <!--                    TASK TITLE, BADGE, AND DROP-DOWN END-->
+
+                            <div th:id="'collapse' + ${task.id}" class="accordion-collapse collapse" data-bs-parent="#completeTasksAccordion">
+                                <div class="accordion-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-light">Description:
+                                            <span th:text="${task.description}"></span>
+                                        </li>
+                                        <li class="list-group-item list-group-item-light"> Date Created:
+                                            <span th:text="${task.dateCreated}"></span>
+                                        </li>
+                                        <li class="list-group-item list-group-item-light"
+                                            th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}">Schedule:
+                                            <span th:text="${task.dateScheduled}"></span>
+                                        </li>
+                                        <li class="list-group-item list-group-item-light">Complete:
+                                            <span th:text="${task.complete}"></span>
+                                        </li>
+                                        <li class="list-group-item list-group-item-info">Category:
+                                            <span th:text="${task.category.title}"></span>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex justify-content-around align-items-center">
+
+                                        <form th:if="${!task.complete}" th:method="POST" th:action="@{|/task/complete/${task.id}|}"
+                                              th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
+                                            <button type="button" class="btn btn-success" onclick="showCompleteConfirmationModal(this.form)">Mark
+                                                as: Complete
+                                            </button>
+                                        </form>
+
+                                        <form th:if="${task.complete}" th:method="POST" th:action="@{|/task/incomplete/${task.id}|}"
+                                              th:object="${task}" th:data-task-id="${task.id}" th:data-task-title="${task.title}">
+                                            <button type="button" class="btn btn-warning" onclick="showIncompleteConfirmationModal(this.form)">Mark
+                                                as: In progress
+                                            </button>
+                                        </form>
+
+                                        <form th:method="POST" th:action="@{|/task/delete/${task.id}|}" th:object="${task}"
+                                              th:data-task-id="${task.id}" th:data-task-title="${task.title}">
+                                            <button type="button" class="btn btn-danger" onclick="showDeleteConfirmationModal(this.form)">Delete
+                                                Task
+                                            </button>
+                                        </form>
+                                        <div>
+                                            <a th:href="@{|/task/edit/${task.id}|}">Edit Task</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--    COLUMN FOR COMPLETE TASKS END -->
         </div>
 <!--    ROW END -->
 
