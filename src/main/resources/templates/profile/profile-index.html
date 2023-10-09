@@ -77,7 +77,7 @@
             <div class="col-md-6">
                 <hr>
                 <!-- Pretty scheduled task test START -->
-                <h2>Target date tasks</h2>
+                <h2>Target Date Tasks <span class="badge bg-info rounded pill">Target Date</span></h2>
                 <div th:each="task : ${scheduledTasks}">
                     <div th:if="${!task.complete}">
                         <div class="d-flex justify-content-between">
@@ -85,7 +85,7 @@
                                 <span th:text="${task.title}"></span>
                             </a>
                             <div>
-                                <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">Target Date:
+                                <span th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}" class="badge bg-info rounded pill">
                                     <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
                                     <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
                                     <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
@@ -107,7 +107,7 @@
 <!--    COLUMN FOR INCOMPLETE TASKS START-->
             <div class="col-md-6">
                 <hr>
-                <h2>In Progress Tasks</h2>
+                <h2>In Progress Tasks <span class="badge bg-warning rounded pill">In Progress</span></h2>
                 <div class="accordion" id="incompleteTasksAccordion">
                     <div th:each="task : ${incompleteTasks}" th:id="'task-' + ${task.id}">
                         <div class="accordion-item">
@@ -183,7 +183,7 @@
 <!--    COLUMN FOR COMPLETE TASKS START -->
             <div class="col-md-6">
                 <hr>
-                <h2>Completed Tasks</h2>
+                <h2>Completed Tasks <span class="badge bg-success rounded pill">Complete</span></h2>
                 <div class="accordion" id="completeTasksAccordion">
                     <div th:each="task : ${completeTasks}">
                         <div class="accordion-item">
