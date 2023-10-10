@@ -77,7 +77,11 @@
             <div class="col-md-6">
                 <hr>
                 <!-- Pretty scheduled task test START -->
-                <h2>Target Date Tasks <span class="badge bg-info rounded pill">Target Date</span></h2>
+                <div class="d-flex justify-content-between">
+                    <h2>Target Date Tasks</h2>
+                    <h2><span class="badge bg-info rounded pill">Target Date</span></h2>
+                </div>
+<!--                <h2>Target Date Tasks <span class="badge bg-info rounded pill">Target Date</span></h2>-->
                 <div th:each="task : ${scheduledTasks}">
                     <div th:if="${!task.complete}">
                         <div class="d-flex justify-content-between">
@@ -107,7 +111,11 @@
 <!--    COLUMN FOR INCOMPLETE TASKS START-->
             <div class="col-md-6">
                 <hr>
-                <h2>In Progress Tasks <span class="badge bg-warning rounded pill">In Progress</span></h2>
+                <div class="d-flex justify-content-between">
+                    <h2>In Progress Tasks</h2>
+                    <h2><span class="badge bg-warning rounded pill">In Progress</span></h2>
+                </div>
+<!--                <h2>In Progress Tasks <span class="badge bg-warning rounded pill">In Progress</span></h2>-->
                 <div class="accordion" id="incompleteTasksAccordion">
                     <div th:each="task : ${incompleteTasks}" th:id="'task-' + ${task.id}">
                         <div class="accordion-item">
@@ -186,7 +194,11 @@
 <!--    COLUMN FOR COMPLETE TASKS START -->
             <div class="col-md-6">
                 <hr>
-                <h2>Completed Tasks <span class="badge bg-success rounded pill">Complete</span></h2>
+                <div class="d-flex justify-content-between">
+                    <h2>Completed Tasks</h2>
+                    <h2><span class="badge bg-success rounded pill">Complete</span></h2>
+                </div>
+<!--                <h2>Completed Tasks <span class="badge bg-success rounded pill">Complete</span></h2>-->
                 <div class="accordion" id="completeTasksAccordion">
                     <div th:each="task : ${completeTasks}">
                         <div class="accordion-item">
@@ -197,7 +209,7 @@
                                         <span th:text="${task.title}"></span>
                                     </span>
                                     <span class="w-50 text-end">
-                                        <span th:if="${task.complete}" class="badge bg-success rounded pill">Complete</span>
+<!--                                        <span th:if="${task.complete}" class="badge bg-success rounded pill">Complete</span>-->
                                     </span>
                                 </button>
 
