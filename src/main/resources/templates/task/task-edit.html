@@ -64,22 +64,24 @@
 
 <th:block th:replace="partials/partials :: scripts"></th:block>
 
-<script>
+<script th:src="@{/js/checkbox.js}"></script>
 
-  const scheduleCheckbox = document.querySelector("#scheduleCheckbox");
-  const dateScheduledField = document.querySelector("#dateScheduledField");
-  const dateScheduled = document.querySelector("#dateScheduled");
+<!--<script>-->
 
-  scheduleCheckbox.addEventListener("change", function() {
-    if (scheduleCheckbox.checked) {
-      dateScheduledField.style.display = "block";
-      dateScheduled.value = new Date().toISOString().substring(0, 10);
-    } else {
-      dateScheduledField.style.display = "none";
-      dateScheduled.value = "1969-12-31";
-    }
-  });
+<!--  const scheduleCheckbox = document.querySelector("#scheduleCheckbox");-->
+<!--  const dateScheduledField = document.querySelector("#dateScheduledField");-->
+<!--  const dateScheduled = document.querySelector("#dateScheduled");-->
 
-</script>
+<!--  scheduleCheckbox.addEventListener("change", function() {-->
+<!--    if (scheduleCheckbox.checked) {-->
+<!--      dateScheduledField.style.display = "block";-->
+<!--      dateScheduled.value = new Date().toISOString().substring(0, 10);-->
+<!--    } else {-->
+<!--      dateScheduledField.style.display = "none";-->
+<!--      dateScheduled.value = "1969-12-31";-->
+<!--    }-->
+<!--  });-->
+
+<!--</script>-->
 </body>
 </html>
