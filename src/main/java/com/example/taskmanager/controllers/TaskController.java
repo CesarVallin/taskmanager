@@ -7,6 +7,8 @@ import com.example.taskmanager.repositories.CategoryRepository;
 import com.example.taskmanager.repositories.TaskRepository;
 import com.example.taskmanager.repositories.UserRepository;
 import org.springframework.security.access.method.P;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,14 @@ public class TaskController {
 
     @GetMapping("/task/create")
     public String createATaskView(Model model) {
+        /** This is utilized for the navbar edit-profile & offcanvas functionality*/
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User currentUser = userDao.findById(loggedInUser.getId()).get();
+            model.addAttribute("user", currentUser);
+        }
+
         List<Category> categories = categoryDao.findAll();
         model.addAttribute("categories", categories);
         model.addAttribute("task", new Task());
@@ -75,6 +85,14 @@ public class TaskController {
     @GetMapping("/task/edit/{id}")
     public String editIndividualTask(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        /** This is utilized for the navbar edit-profile & offcanvas functionality*/
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            User currentUser = userDao.findById(loggedInUser.getId()).get();
+            model.addAttribute("user", currentUser);
+        }
+
         if (taskDao.existsById(id)) {
             Task taskToEdit = taskDao.findById(id).get();
             if(taskToEdit.getUser().getId() == loggedInUser.getId()) {

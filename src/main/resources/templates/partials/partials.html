@@ -18,45 +18,96 @@
 <body>
 
 <!--    used to have inside of class attribute : navbar-dark bg-dark-->
-<nav th:fragment="nav" class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="/">Task Manager</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav d-flex w-100">
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/profile"><button class="btn-link btn btn-sm">Task-Hub</button></a>
-                </li>
+<div th:fragment="nav" th:remove="tag">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">Task Manager</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav d-flex w-100">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/profile"><button class="btn-link btn btn-sm">Task-Hub</button></a>
+                    </li>
 
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link">
-                        <button class="btn-link btn btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="editProfileBtn">
-                            View Profile
-                        </button>
-                    </a>
-                </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link">
+                            <button class="btn-link btn btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="editProfileBtn">
+                                View Profile
+                            </button>
+                        </a>
+                    </li>
 
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/task/create"><button class="btn-link btn btn-sm">Create Task</button></a>
-                </li>
-                <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" href="/sign-up"><button class="btn-link btn btn-sm">Register</button></a>
-                </li>
-                <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" href="/login"><button class="btn-link btn btn-sm">Login</button></a>
-                </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" th:method="post" class="py-2">
-                        <button class="btn-link btn btn-sm">Logout</button>
-                    </form>
-                </li>
-            </ul>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/task/create"><button class="btn-link btn btn-sm">Create Task</button></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" href="/sign-up"><button class="btn-link btn btn-sm">Register</button></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" href="/login"><button class="btn-link btn btn-sm">Login</button></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" th:method="post" class="py-2">
+                            <button class="btn-link btn btn-sm">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--        NEW Offcanvas start -->
+    <div sec:authorize="isAuthenticated()">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Profile</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <div>
+                    <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">
+                    <p th:text="${user.getUsername()}"></p>
+                </div>
+
+                <div id="invalidInput"></div>
+
+                <hr>
+<!--                <form th:action="@{|/profile/edit/${user.id}|}" method="POST" th:object="${user}" id="profile-edit-form">-->
+                    <div class="form-group mb-3">
+                        <label for="firstname-edit">First name</label>
+                        <input id="firstname-edit" th:value="${user.firstName}" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="lastname-edit">Last name</label>
+                        <input id="lastname-edit" th:value="${user.lastName}" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="username-edit">user-name</label>
+                        <input id="username-edit" th:value="${user.username}" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email-edit">Email</label>
+                        <input id="email-edit" th:value="${user.email}" class="form-control" required>
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="updateProfileBtn" th:data-user-id="${user.id}">Submit updated fields</button>
+                    <br><span>Log in required after submittal</span>
+<!--                </form>-->
+                <hr>
+                <div class="py-3">
+                    <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>
+                    <button type="button" id="default-picBtn" class="btn btn-primary btn-sm" style="display: none;">Delete profile picture</button>
+
+                </div>
+            </div>
         </div>
     </div>
-</nav>
+    <!--            Offcanvas END-->
+</div>
 
 <header th:fragment="header(heading)">
     <h1 class="text-center display-4 my-4" th:text="${heading}"></h1>
@@ -73,6 +124,93 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
+    <script th:src="@{/js/file-picker.js}"></script>
+
+    <script>
+        (async () => {
+
+            const updateProfile = async () => {
+                const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+                const firstName = document.querySelector("#firstname-edit");
+                const lastName = document.querySelector("#lastname-edit");
+                const userName = document.querySelector("#username-edit");
+                const email = document.querySelector("#email-edit");
+                const userId = updateProfileBtn.getAttribute('data-user-id');
+
+                const invalidUserDiv = document.querySelector("#invalidInput");
+
+
+                //
+                if (firstName.value === `` || lastName.value === `` || userName.value === `` || email.value === ``) {
+                    invalidUserDiv.innerText = `All fields must be filled before submitting`;
+                    return;
+                }
+
+
+                let updateProfile = await fetch(`/profile/edit/${userId}`,{
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                    body: JSON.stringify(
+                        {
+                            firstName: firstName.value,
+                            lastName: lastName.value,
+                            username: userName.value,
+                            email: email.value
+                        }
+                    )
+                });
+                const returnedUser = await updateProfile.json();
+                console.log(returnedUser);
+                if(returnedUser.id > 0) {
+                    // redirect to login
+                    window.location.href = "/login";
+                } else {
+                    // render the returnedUser.username as our invalid message
+                    invalidUserDiv.innerText = returnedUser.username;
+                }
+            };
+
+            const updateProfileBtn = document.querySelector("#updateProfileBtn");
+            updateProfileBtn.addEventListener("click", updateProfile);
+
+
+
+
+            // updateProfileBtn.addEventListener("click", async () => {
+            //     let updateProfile = await fetch(`profile/edit/${userId}`,{
+            //         method: 'PUT',
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //             'X-CSRF-TOKEN': csrfToken,
+            //         },
+            //         body: JSON.stringify(
+            //                 {
+            //                     firstName: firstName.value,
+            //                     lastName: lastName.value,
+            //                     userName: userName.value,
+            //                     email: email.value
+            //                 }
+            //             )
+            //     });
+            //     const returnedUser = await updateProfile.json();
+            //     console.log(returnedUser);
+            //     if(returnedUser.id > 0) {
+            //         // redirect to login
+            //         window.location.href = "/login";
+            //     } else {
+            //         // render the returnedUser.username as our invalid message
+            //         invalidUserDiv.innerText = returnedUser.userName;
+            //     }
+            // });
+
+        }) ();
+
+    </script>
+
 </th:block>
+
 </body>
 </html>

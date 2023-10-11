@@ -7,6 +7,8 @@ import com.example.taskmanager.repositories.TaskRepository;
 import com.example.taskmanager.repositories.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,14 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String profileIndexPage(Model model) {
+
+        /** This is utilized for the navbar edit-profile & offcanvas functionality*/
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User currentUser = userDao.findById(loggedInUser.getId()).get();
+            model.addAttribute("user", currentUser);
+        }
         /** User*/
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.findById(loggedInUser.getId()).get();
@@ -71,39 +81,79 @@ public class ProfileController {
         model.addAttribute("scheduledTasks", scheduledTasks);
         model.addAttribute("unscheduledTasks", unscheduledTasks);
         // User
-        model.addAttribute("user", loggedInUser);
+        model.addAttribute("user", currentUser);
         // tasks, tasks, not used as of now...
         model.addAttribute("tasks", tasks);
 
         return "profile/profile-index";
     }
 
-    @PostMapping("/profile/edit/{id}")
-    public String updateUserInfo(@ModelAttribute User user, @PathVariable long id) {
+//    @PostMapping("/profile/edit/{id}")
+//    public String updateUserInfo(@ModelAttribute User user, @PathVariable long id) {
+//
+//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        User editedUser = userDao.findById(id).get();
+//
+//        /** Validation for unique fields in database: username & email*/
+//        if(loggedInUser.getId() == editedUser.getId()) {
+//            User userNameInspection = userDao.findByUsername(user.getUsername());
+//            User userEmailInpsection = userDao.findByEmail(user.getEmail());
+//            if(userNameInspection != null && (userNameInspection.getId() != loggedInUser.getId())) {
+//                return "redirect:/profile?invalidUsername";
+//            } else if (userEmailInpsection != null && (userEmailInpsection.getId() != loggedInUser.getId())) {
+//                return "redirect:/profile?invalidEmail";
+//            } else {
+//                editedUser.setFirstName(user.getFirstName());
+//                editedUser.setLastName(user.getLastName());
+//                editedUser.setUsername(user.getUsername());
+//                editedUser.setEmail(user.getEmail());
+//                userDao.save(editedUser);
+//                return "redirect:/login";
+//            }
+//        }
+//        return "redirect:/profile";
+//    }
 
+    @PutMapping("/profile/edit/{id}")
+    @ResponseBody
+    public User userToUpdate(@RequestBody User user, @PathVariable long id) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user));
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         User editedUser = userDao.findById(id).get();
+        User invalidUser = new User();
+        invalidUser.setId(-1);
 
-        /** Validation for unique fields in database: username & email*/
         if(loggedInUser.getId() == editedUser.getId()) {
             User userNameInspection = userDao.findByUsername(user.getUsername());
             User userEmailInpsection = userDao.findByEmail(user.getEmail());
             if(userNameInspection != null && (userNameInspection.getId() != loggedInUser.getId())) {
-                return "redirect:/profile?invalidUsername";
+//            if(userDao.existsByUsername(user.getUsername())) {
+                invalidUser.setUsername("Username is invalid");
+                return invalidUser;
+//                return "redirect:/profile?invalidUsername";
             } else if (userEmailInpsection != null && (userEmailInpsection.getId() != loggedInUser.getId())) {
-                return "redirect:/profile?invalidEmail";
+//            } else if (userDao.existsByEmail(user.getEmail())) {
+                invalidUser.setUsername("Email is invalid");
+                return invalidUser;
+//                return "redirect:/profile?invalidEmail";
             } else {
                 editedUser.setFirstName(user.getFirstName());
                 editedUser.setLastName(user.getLastName());
                 editedUser.setUsername(user.getUsername());
                 editedUser.setEmail(user.getEmail());
                 userDao.save(editedUser);
-                return "redirect:/login";
+                return editedUser;
+//                return "redirect:/login";
             }
+
         }
-        return "redirect:/profile";
+        invalidUser.setUsername("You are trying to change a different user, naughty boy");
+        return invalidUser;
     }
+
 
     @PutMapping("/profile/profile-pic")
     @ResponseBody
