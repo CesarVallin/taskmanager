@@ -177,35 +177,6 @@
             updateProfileBtn.addEventListener("click", updateProfile);
 
 
-
-
-            // updateProfileBtn.addEventListener("click", async () => {
-            //     let updateProfile = await fetch(`profile/edit/${userId}`,{
-            //         method: 'PUT',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //             'X-CSRF-TOKEN': csrfToken,
-            //         },
-            //         body: JSON.stringify(
-            //                 {
-            //                     firstName: firstName.value,
-            //                     lastName: lastName.value,
-            //                     userName: userName.value,
-            //                     email: email.value
-            //                 }
-            //             )
-            //     });
-            //     const returnedUser = await updateProfile.json();
-            //     console.log(returnedUser);
-            //     if(returnedUser.id > 0) {
-            //         // redirect to login
-            //         window.location.href = "/login";
-            //     } else {
-            //         // render the returnedUser.username as our invalid message
-            //         invalidUserDiv.innerText = returnedUser.userName;
-            //     }
-            // });
-
         }) ();
 
     </script>
