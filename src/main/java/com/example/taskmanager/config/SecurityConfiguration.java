@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/profile", "/profile/edit/*", "/task/create", "/task/edit/*", "/task/delete/*", "/task/complete/*", "/task/incomplete/*", "/profile/profile-pic", "/profile/default-pic").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
-                        .requestMatchers("/", "/sign-up", "/login").permitAll()
+                        .requestMatchers("/", "/sign-up", "/login", "/keys.js").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
