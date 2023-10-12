@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/partials :: head('Sign-up')"></head>
+<head th:replace="~{partials/partials :: head('Sign-up')}"></head>
 
 <body>
 
 <div id="wrapper">
-    <div th:replace="partials/partials :: nav"></div>
-    <header th:replace="partials/partials :: header('Sign-up')"></header>
+    <div th:replace="~{partials/partials :: nav}"></div>
+    <header th:replace="~{partials/partials :: header('Sign-up')}"></header>
 
     <main class="container">
         <div th:if="${param.invalidUsername}">
@@ -54,11 +54,11 @@
         </form>
     </main>
 
-    <footer th:replace="partials/partials :: footer"></footer>
+    <footer th:replace="~{partials/partials :: footer}"></footer>
 </div>
 
 
-<th:block th:replace="partials/partials :: scripts"></th:block>
+<th:block th:replace="~{partials/partials :: scripts}"></th:block>
 
 </body>
 </html>
