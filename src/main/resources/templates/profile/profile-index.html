@@ -11,67 +11,6 @@
 
     <main class="container">
 
-        <div th:if="${param.invalidUsername}" class="text-danger">
-            Unable to change username, username already exists.
-        </div>
-        <div th:if="${param.invalidEmail}" class="text-danger">
-            Unable to change email, email already exists.
-        </div>
-
-<!--&lt;!&ndash;        NEW Offcanvas start &ndash;&gt;-->
-<!--        <div>-->
-<!--&lt;!&ndash;            <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">&ndash;&gt;-->
-<!--&lt;!&ndash;            <p th:text="${user.getUsername()}" id="user-usernameDisplay"></p>&ndash;&gt;-->
-
-<!--            &lt;!&ndash;            Offcanvas START&ndash;&gt;-->
-<!--&lt;!&ndash;            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="editProfileBtn">&ndash;&gt;-->
-<!--&lt;!&ndash;                Edit Profile&ndash;&gt;-->
-<!--&lt;!&ndash;            </button>&ndash;&gt;-->
-<!--            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">-->
-
-<!--                <div class="offcanvas-header">-->
-<!--                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Profile</h5>-->
-<!--                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>-->
-<!--                </div>-->
-
-<!--                <div class="offcanvas-body">-->
-<!--                    <div>-->
-<!--                        <img th:src="${user.getProfilePic()}" alt="profile_pic" id="profile-pic-img">-->
-<!--                        <p th:text="${user.getUsername()}"></p>-->
-<!--                    </div>-->
-<!--                    <hr>-->
-<!--                    <form th:action="@{|/profile/edit/${user.id}|}" method="POST" th:object="${user}" id="profile-edit-form">-->
-<!--                        <div class="form-group mb-3">-->
-<!--                            <label for="firstname-edit">First name</label>-->
-<!--                            <input id="firstname-edit" th:field="*{firstName}" class="form-control" required>-->
-<!--                        </div>-->
-<!--                        <div class="form-group mb-3">-->
-<!--                            <label for="lastname-edit">Last name</label>-->
-<!--                            <input id="lastname-edit" th:field="*{lastName}" class="form-control" required>-->
-<!--                        </div>-->
-<!--                        <div class="form-group mb-3">-->
-<!--                            <label for="username-edit">user-name</label>-->
-<!--                            <input id="username-edit" th:field="*{username}" class="form-control" required>-->
-<!--                        </div>-->
-<!--                        <div class="form-group mb-3">-->
-<!--                            <label for="email-edit">Email</label>-->
-<!--                            <input id="email-edit" th:field="*{email}" class="form-control" required>-->
-<!--                        </div>-->
-<!--                        <button type="submit" class="btn btn-primary btn-sm" id="update-profileBtn">Submit updated fields</button>-->
-<!--                        <br><span>Log in required after submittal</span>-->
-<!--                    </form>-->
-<!--                    <hr>-->
-<!--                    <div class="py-3">-->
-<!--                        <button type="button" id="file-stack-picBtn" class="btn btn-primary btn-sm">Choose profile picture</button>-->
-<!--                        <button type="button" id="default-picBtn" class="btn btn-primary btn-sm" style="display: none;">Delete profile picture</button>-->
-
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--&lt;!&ndash;            Offcanvas END&ndash;&gt;-->
-
-
 <!--        ROW START -->
         <div class="row">
             <div class="col-md-6">
@@ -140,18 +79,22 @@
                             <div th:id="'collapse' + ${task.id}" class="accordion-collapse collapse" data-bs-parent="#incompleteTasksAccordion">
                                 <div class="accordion-body">
                                     <ul class="list-group">
-                                        <li class="list-group-item list-group-item-light">Description:
+                                        <li class="list-group-item list-group-item-light">Description:<br>
                                             <span th:text="${task.description}"></span>
                                         </li>
                                         <li class="list-group-item list-group-item-light"> Date Created:
-                                            <span th:text="${task.dateCreated}"></span>
+                                            <span th:text="${#strings.substring(task.dateCreated, 5,7)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateCreated, 8)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateCreated, 0,4)}"></span>
                                         </li>
                                         <li class="list-group-item list-group-item-light"
-                                            th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}">Schedule:
-                                            <span th:text="${task.dateScheduled}"></span>
+                                            th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}">Target Date:
+                                            <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
                                         </li>
-                                        <li class="list-group-item list-group-item-light">Complete:
-                                            <span th:text="${task.complete}"></span>
+                                        <li class="list-group-item list-group-item-light">Status:
+                                            <span>In Progress</span>
                                         </li>
                                         <li class="list-group-item list-group-item-info">Category:
                                             <span th:text="${task.category.title}"></span>
@@ -219,18 +162,22 @@
                             <div th:id="'collapse' + ${task.id}" class="accordion-collapse collapse" data-bs-parent="#completeTasksAccordion">
                                 <div class="accordion-body">
                                     <ul class="list-group">
-                                        <li class="list-group-item list-group-item-light">Description:
+                                        <li class="list-group-item list-group-item-light">Description:<br>
                                             <span th:text="${task.description}"></span>
                                         </li>
                                         <li class="list-group-item list-group-item-light"> Date Created:
-                                            <span th:text="${task.dateCreated}"></span>
+                                            <span th:text="${#strings.substring(task.dateCreated, 5,7)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateCreated, 8)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateCreated, 0,4)}"></span>
                                         </li>
                                         <li class="list-group-item list-group-item-light"
-                                            th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}">Schedule:
-                                            <span th:text="${task.dateScheduled}"></span>
+                                            th:if="${!#strings.contains(task.dateScheduled, '1969') && !#strings.contains(task.dateScheduled, '1970')}">Target Date:
+                                            <span th:text="${#strings.substring(task.dateScheduled, 5,7)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateScheduled, 8)}"></span>/
+                                            <span th:text="${#strings.substring(task.dateScheduled, 0,4)}"></span>
                                         </li>
-                                        <li class="list-group-item list-group-item-light">Complete:
-                                            <span th:text="${task.complete}"></span>
+                                        <li class="list-group-item list-group-item-light">Status:
+                                            <span>Complete</span>
                                         </li>
                                         <li class="list-group-item list-group-item-info">Category:
                                             <span th:text="${task.category.title}"></span>
