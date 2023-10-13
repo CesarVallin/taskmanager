@@ -15,6 +15,13 @@
     height: auto;
 }
 
+#dev-picture{
+    max-width: 480px;
+    max-height: 480px;
+    width: auto;
+    height: auto;
+}
+
 .landing-page-images {
     width: 100%;
     height: auto;
