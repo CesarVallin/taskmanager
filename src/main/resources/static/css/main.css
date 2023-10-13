@@ -16,9 +16,13 @@
 }
 
 .landing-page-images {
-    max-width: 480px;
-    max-height: 480px;
-    width: auto;
+    width: 100%;
     height: auto;
     display: block;
+
+    /*max-width: 480px;*/
+    /*max-height: 480px;*/
+    /*width: auto;*/
+    /*height: auto;*/
+    /*display: block;*/
 }
