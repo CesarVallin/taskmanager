@@ -25,13 +25,13 @@
                     <!-- Checkbox for scheduling -->
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="scheduleCheckbox" name="scheduleCheckbox">
-                        <label class="form-check-label" for="scheduleCheckbox">Schedule Task</label>
+                        <label class="form-check-label" for="scheduleCheckbox">Set Target Date</label>
                     </div>
 
                     <!-- DateScheduled input (initially hidden) -->
                     <div id="dateScheduledField" style="display: none;">
                         <div class="form-group mb-3">
-                            <label for="dateScheduled">Scheduled Date</label>
+                            <label for="dateScheduled">Target Date</label>
                             <input th:field="*{dateScheduled}" type="date" name="dateScheduled" id="dateScheduled" class="form-control">
                         </div>
                     </div>
