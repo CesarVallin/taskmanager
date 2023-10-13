@@ -28,3 +28,18 @@
     height: auto;
     display: block;
 }
+
+.image-container {
+    position: relative;
+}
+.image-container span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 1px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+}
