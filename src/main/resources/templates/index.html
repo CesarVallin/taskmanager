@@ -5,10 +5,22 @@
 
 <div id="wrapper">
     <div th:replace="~{partials/partials :: nav}"></div>
-    <header th:replace="~{partials/partials :: header('Home')}"></header>
+    <header th:replace="~{partials/partials :: header('Task Manager')}"></header>
 
     <main class="container">
-        <h1>Welcome to Task Manager</h1>
+        <h1></h1>
+        <div class="row">
+
+            <div class="col-md-6 d-flex justify-content-center mt-5 border-bottom">
+                <div>
+                    <img class="landing-page-images" src="/img/first-screenshot.png">
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center mt-5 border-bottom">
+                <img class="landing-page-images" src="/img/second-screenshot.png">
+            </div>
+        </div>
+
     </main>
 
     <footer th:replace="~{partials/partials :: footer}"></footer>
