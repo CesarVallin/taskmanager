@@ -10,9 +10,12 @@
     <header th:replace="~{partials/partials :: header('Task-Hub')}"></header>
 
     <main class="container">
-        <div th:if="${tasks.size() == 0}">
-            <span>Start utilizing Task Manager, create a task ... </span><br>
-            <a href="/task/create" class="btn btn-outline-secondary">Create Task</a>
+        <div th:if="${tasks.size() == 0}" class="row d-flex justify-content-center">
+            <div class="alert alert-dismissible alert-warning col-md-3">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <span>Start utilizing Task Manager, create a task ... </span><br>
+                <a href="/task/create" class="btn btn-outline-secondary">Create Task</a>
+            </div>
         </div>
 
 <!--        ROW START -->
