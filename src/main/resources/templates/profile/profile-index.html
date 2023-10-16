@@ -10,6 +10,10 @@
     <header th:replace="~{partials/partials :: header('Task-Hub')}"></header>
 
     <main class="container">
+        <div th:if="${tasks.size() == 0}">
+            <span>Start utilizing Task Manager, create a task ... </span><br>
+            <a href="/task/create" class="btn btn-outline-secondary">Create Task</a>
+        </div>
 
 <!--        ROW START -->
         <div class="row">
