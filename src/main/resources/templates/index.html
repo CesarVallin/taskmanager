@@ -74,7 +74,7 @@
                 <div class="accordion" id="meetTheDev">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDev" aria-expanded="false" aria-controls="collapseDev">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDev" aria-expanded="false" aria-controls="collapseDev" onclick="scrollToAccordion()">
                                 Meet The Developer
                             </button>
                         </h2>
@@ -112,6 +112,16 @@
 
 
 <th:block th:replace="~{partials/partials :: scripts}"></th:block>
+<script>
+    function scrollToAccordion() {
+        setTimeout(() => {
+            const accordion = document.getElementById("meetTheDev");
+            const offset = accordion.getBoundingClientRect().top;
+            window.scrollBy(0, offset - 30); // adjust 100 pixels for the fixed header
+        }, 200)
+
+    }
+</script>
 
 </body>
 </html>
