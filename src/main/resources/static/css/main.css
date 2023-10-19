@@ -36,6 +36,13 @@
     display: block;
 }
 
+.landing-page-images-mobile-phone-overlay {
+    max-width: 222px;
+    max-height: 480px;
+    width: auto;
+    height: auto;
+}
+
 .image-container {
     position: relative;
 }
